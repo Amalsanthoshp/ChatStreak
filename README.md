@@ -1,2 +1,2 @@
-# chat-it
-Decentralized Chat App
+# Chat.it
+Decentralized Chating App
