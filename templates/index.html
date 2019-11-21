@@ -1,0 +1,133 @@
+<html> 
+<head> 
+	<script
+  src="https://code.jquery.com/jquery-3.4.1.js"
+  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+  crossorigin="anonymous"></script>
+
+
+	<script> 
+		//function that display value 
+		function dis(val) 
+		{ 
+			document.getElementById("result").value+=val 
+		} 
+		
+		//function that evaluates the digit and return result 
+		function solve() 
+
+		{ //csrf token when ever we pass post request django will check for csrf_token for that this function is implemented
+		  function getCookie(name) {
+			    var cookieValue = null;
+			    if (document.cookie && document.cookie !== '') {
+			        var cookies = document.cookie.split(';');
+			        for (var i = 0; i < cookies.length; i++) {
+			            var cookie = cookies[i].trim();
+			            // Does this cookie string begin with the name we want?
+			            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+			                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+			                break;
+			            }
+			        }
+			    }
+			    return cookieValue;
+			}
+			//token is stored inside variable
+			var csrftoken = getCookie('csrftoken');
+
+			//took value inside the box
+    	    let x = document.getElementById("result").value 
+			console.log(x)
+			console.log(csrftoken)
+
+			var jsonData =$.ajax({
+				method:"post",
+				url:"/calculator/",//url which we have implemented calculator
+				data:{'arg':x,csrfmiddlewaretoken: '{{ csrf_token }}' }, //arg and csrf_token is assigned
+				dataType:"json",
+
+				async:false
+			}).responseText;
+
+			var json_res = JSON.parse(jsonData); //parse the data from calculator function in view *HttpResponse is returned here*
+			console.log(json_res)
+			document.getElementById('ans').innerHTML = json_res; //displayed answer in required id
+
+
+		
+		} 
+		
+		//function that clear the display 
+		function clr() 
+		{ 
+			document.getElementById("result").value = "" 
+		} 
+	</script> 
+	<!-- for styling -->
+	<style> 
+		.title{ 
+		margin-bottom: 10px; 
+		text-align:center; 
+		width: 210px; 
+		color:green; 
+		border: solid black 2px; 
+		} 
+
+		input[type="button"] 
+		{ 
+		background-color:green; 
+		color: black; 
+		border: solid black 2px; 
+		width:100% 
+		} 
+
+		input[type="text"] 
+		{ 
+		background-color:white; 
+		border: solid black 2px; 
+		width:100% 
+		} 
+	</style> 
+</head> 
+<!-- create table -->
+<body> 
+	<div class = title >GeeksforGeeks Calculator</div> 
+	<table border="1"> 
+		<tr> 
+			<td colspan="3"><input type="text" id="result"/></td> 
+			<!-- clr() function will call clr to clear all value -->
+			<td><input type="button" value="c" onclick="clr()"/> </td> 
+		</tr> 
+		<tr> 
+			<!-- create button and assign value to each button -->
+			<!-- dis("1") will call function dis to display value -->
+			<td><input type="button" value="1" onclick="dis('1')"/> </td> 
+			<td><input type="button" value="2" onclick="dis('2')"/> </td> 
+			<td><input type="button" value="3" onclick="dis('3')"/> </td> 
+			<td><input type="button" value="/" onclick="dis('/')"/> </td> 
+		</tr> 
+		<tr> 
+			<td><input type="button" value="4" onclick="dis('4')"/> </td> 
+			<td><input type="button" value="5" onclick="dis('5')"/> </td> 
+			<td><input type="button" value="6" onclick="dis('6')"/> </td> 
+			<td><input type="button" value="-" onclick="dis('-')"/> </td> 
+		</tr> 
+		<tr> 
+			<td><input type="button" value="7" onclick="dis('7')"/> </td> 
+			<td><input type="button" value="8" onclick="dis('8')"/> </td> 
+			<td><input type="button" value="9" onclick="dis('9')"/> </td> 
+			<td><input type="button" value="+" onclick="dis('+')"/> </td> 
+		</tr> 
+		<tr> 
+			<td><input type="button" value="." onclick="dis('.')"/> </td> 
+			<td><input type="button" value="0" onclick="dis('0')"/> </td> 
+			<!-- solve function call function solve to evaluate value -->
+			<td><input type="button" value="=" onclick="solve()"/> </td> 
+			<td><input type="button" value="*" onclick="dis('*')"/> </td> 
+		</tr> 
+	</table> 
+	<div>
+		<h1>ANSWER:   <span id='ans'>{{ans}}</span></h1>
+	</div>
+</body> 
+</html> 
