@@ -1,0 +1,43 @@
+
+.container {
+width: auto;
+position: relative;
+margin:0 auto;
+line-height: 1.4em;
+display:inline-flex;
+}
+
+/* If in mobile screen with maximum width 479px. The iPhone screen resolution is 320x480 px (except iPhone4, 640x960) */    
+@media only screen and (max-width: 479px){
+    .container { width: 90%; }
+    .mess { width:90%; }
+}
+.container div {
+	background: silver;
+}
+
+.side-left {
+	width:15rem;
+}
+.main {
+	width:70rem;
+}
+
+.side-right {
+	width:15rem;
+}
+
+.main-bottom {
+	position: absolute;
+	bottom: 0px;
+	margin-bottom: 1.5rem;
+
+}
+
+.bottom-mess {
+	position: absolute;
+	bottom: 0px;
+	margin-bottom: 1.5rem;
+	display:inline;
+	width:69%;
+}
