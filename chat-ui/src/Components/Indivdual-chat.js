@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-class Feed extends React.Component {
+class IndividualChat extends React.Component {
 
 	constructor(){
 		super()
@@ -10,20 +10,19 @@ class Feed extends React.Component {
 	render(){
 
 		return(
-					  
-				<div className="ui fluid blue card">
+				<>
+					<div className="ui fluid blue card">
 					<div className="right floated author">
 					      <img className="ui avatar image" src="https://semantic-ui.com/images/avatar/small/jenny.jpg"/> Matt
 					    </div>
-					  <div className="content">
+					  <div className="content" style={{paddingBottom:'0'}}>
 					  	<span className='left floated'> Hi this is mattt</span>
-					  	<span className="left floated time description">2 days ago</span> 
+					  	<span className="right floated time">2 days ago</span> 
 					</div>
 					</div>
-
-
+				</>
 			);
 	}
 }
 
-export default Feed;
+export default IndividualChat;
