@@ -11,7 +11,11 @@ class Main extends Component {
     return (
     	<HashRouter>
         <div>
-          <h1>Chat IT</h1>
+        <div className="ui three item menu">
+		  <a className="active item">Editorials</a>
+		  <a className="item">Reviews</a>
+		  <a className="item">Upcoming Events</a>
+		</div>
           {/*<ul className="header">
             <li><a href="/">Home</a></li>
             <li><a href="/stuff">Stuff</a></li>
