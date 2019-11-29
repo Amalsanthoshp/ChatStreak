@@ -3,6 +3,8 @@ from django.http import HttpResponse
 from .models import *
 from .serializers import *
 from rest_framework import generics
+from django.views.decorators.csrf import csrf_exempt
+
 
 # Create your views here.
 def home(request):
@@ -28,4 +30,11 @@ class ListGroup(generics.ListCreateAPIView):
 	queryset = GroupChat.objects.all().select_related()
 	serializer_class = GroupSerializer 
 	
-	
+@csrf_exempt 
+def message_send(request):
+	if request.method == "POST": #os request.GET()
+		mess = request.POST.get("hellos")
+		print(mess)
+		return HttpResponse(mess)
+	else:
+		return HttpResponse('hello')

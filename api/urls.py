@@ -23,6 +23,7 @@ urlpatterns = [
     path('login/', auth_views.LoginView.as_view(template_name='registration/login.html')),
     path('chat/', ListUser.as_view()),
     path('chat/<int:pk>/',DetailUser.as_view()),
-    path('group_chat/',ListGroup.as_view())
+    path('group_chat/',ListGroup.as_view()),
+    path('message_send/',message_send,name='message_send')
 
 ]

@@ -138,9 +138,16 @@ REST_FRAMEWORK = {
     # or allow read-only access for unauthenticated users.
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
-    ]
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES':(
+    'rest_framework.authentication.SessionAuthentication',
+    'rest_framework.authentication.BasicAuthentication'
+    ),
 }
 
 CORS_ORIGIN_WHITELIST = [
-'http://localhost:3001',
+'http://localhost:3000',
 ]
+
+
+CSRF_COOKIE_NAME = "XSRF-TOKEN"
