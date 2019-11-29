@@ -10,7 +10,6 @@ class Main extends Component {
   render() {
     return (
     	<HashRouter>
-        <div>
         <div className="ui three item menu">
 		  <a className="active item">Editorials</a>
 		  <a className="item">Reviews</a>
@@ -21,10 +20,9 @@ class Main extends Component {
             <li><a href="/stuff">Stuff</a></li>
             <li><a href="/contact">Contact</a></li>
           </ul>*/}
-          <div className="content">
+          <div className="ui container fluid" style={{height:'100vh'}}>
              <Route path="/" component={Chat}/>
           </div>
-        </div>
         </HashRouter>
     );
   }
