@@ -6,6 +6,7 @@ import ChatScreen from './Components/Chat-screen'
 import IndividualChat from './Components/Indivdual-chat';
 import axios from 'axios';
 import Cookies from 'js-cookie';
+import * as Axios from './Axios/Axios';
 
 
 class Chat extends React.Component {
@@ -16,53 +17,30 @@ class Chat extends React.Component {
     persons: []
   }
   this.handleClick =this.handleClick.bind(this);
+  this.getMessage = this.getMessage.bind(this);
 
  }
-	 componentDidMount() {
+ 	getMessage(){
 	    axios.get(`http://localhost:8000/chat/1/`)
 	      .then(res => {
 	        const persons = res.data;
 	        this.setState({ persons });
-	        
-	      })
+	        console.log(persons)
+	  })}
+	 componentDidMount() {
+	 	 axios.get(`http://localhost:8000/chat/1/`)
+	      .then(res => {
+	        const persons = res.data;
+	        this.setState({ persons });
+	  		})
 	  }
+	  
 	  handleClick(){
-	    function getCookie(name) {
-		    var cookieValue = null;
-		    if (document.cookie && document.cookie !== '') {
-		        var cookies = document.cookie.split(';');
-		        for (var i = 0; i < cookies.length; i++) {
-		            var cookie = cookies[i].trim();
-		            // Does this cookie string begin with the name we want?
-		            if (cookie.substring(0, name.length + 1) === (name + '=')) {
-		                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-		                break;
-		            }
-		        }
-		    }
-		    return cookieValue;
-		}
-		var csrftoken = getCookie('csrftoken');
-		console.log(csrftoken)
-	    let a = document.getElementById('message').value
-	    console.log(a)
-	  	  axios.post(`http://localhost:8000/message_send/`, {
-		            'message':a,
-		            'send_to':'amalsan',
-		            'test':'hellos'
-		        },
-		        {
-		            headers: {
-		                "Content-Type": 'application/json',
-		                'X-CSRFTOKEN': csrftoken,
+	    let message = document.getElementById('message').value
+	  	Axios.postMessage(message,'test','hell')
+	  	this.getMessage();
+	  	console.log(this.state.persons)
 
-					
-
-		            },
-		        }
-		    )
-		    .then(res => console.log(res))
-		    .catch(error => console.log(error))
 	 }
 	  
 
