@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import Chat from './Chat'
+import Chat from './Chat';
+import Login from './Login';
 import {
   Route,
   NavLink,
@@ -21,7 +22,8 @@ class Main extends Component {
             <li><a href="/contact">Contact</a></li>
           </ul>*/}
           <div className="ui container fluid" style={{height:'100vh'}}>
-             <Route path="/" component={Chat}/>
+             <Route path="/login" component={Login}/>
+             <Route path="/home" component={Chat}/>
           </div>
         </HashRouter>
     );
