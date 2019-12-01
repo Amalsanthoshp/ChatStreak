@@ -2,15 +2,16 @@ import React, { Component } from "react";
 import Chat from './Chat';
 import Login from './Login';
 import {
+  Router,
   Route,
   NavLink,
   HashRouter
 } from "react-router-dom";
-
+import history from './Axios/History';
 class Main extends Component {
   render() {
     return (
-    	<HashRouter>
+      <Router history={history}>
         <div className="ui three item menu">
 		  <a className="active item">Editorials</a>
 		  <a className="item">Reviews</a>
@@ -25,7 +26,7 @@ class Main extends Component {
              <Route path="/login" component={Login}/>
              <Route path="/home" component={Chat}/>
           </div>
-        </HashRouter>
+       </Router>
     );
   }
 }
