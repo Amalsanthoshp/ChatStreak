@@ -17,6 +17,11 @@ from django.contrib import admin
 from django.urls import path,include
 from django.contrib.auth import views as auth_views
 from .views import *
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,TokenVerifyView)
+
+
 urlpatterns = [
     path('home/',home,name='home'),
     path('',chat_screen,name='chat'),
@@ -24,6 +29,10 @@ urlpatterns = [
     path('chat/', ListUser.as_view()),
     path('chat/<int:pk>/',DetailUser.as_view()),
     path('group_chat/',ListGroup.as_view()),
-    path('message_send/',message_send,name='message_send')
+    path('message_send/',message_send,name='message_send'),
+    path('auth/token/obtain/', TokenObtainPairView.as_view()),
+    path('auth/token/refresh/', TokenRefreshView.as_view()),
+    path('auth/token/verify/', TokenVerifyView.as_view(), name='token_verify'),
+
 
 ]
