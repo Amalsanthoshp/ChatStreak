@@ -18,26 +18,31 @@ class Chat extends React.Component {
   }
   this.handleClick =this.handleClick.bind(this);
   this.getMessage = this.getMessage.bind(this);
+  this.test= this.test.bind(this);
 
  }
  	getMessage(){
-	    axios.get(`http://localhost:8000/chat/1/`)
+	    axios.get(`http://localhost:8000/api/chat/1/`)
 	      .then(res => {
 	        const persons = res.data;
 	        this.setState({ persons });
 	        console.log(persons)
 	  })}
 	 componentDidMount() {
-	 	 axios.get(`http://localhost:8000/chat/1/`)
+	 	 axios.get(`http://localhost:8000/api/chat/1/`)
 	      .then(res => {
 	        const persons = res.data;
 	        this.setState({ persons });
 	  		})
+	      return Axios.tokenVerify('http://localhost:8000/api/auth/token/verify/')
+	  }
+	  test() {
+	  	Axios.tokenVerify('http://localhost:8000/api/auth/token/verify/')
 	  }
 	  
 	  handleClick(){
 	    let message = document.getElementById('message').value
-	  	Axios.postMessage(message,'test','hell')
+	  	Axios.postMessage(message,'test','hell','http://localhost:8000/api/message_send/')
 	  	this.getMessage();
 	  	console.log(this.state.persons)
 
@@ -70,7 +75,7 @@ class Chat extends React.Component {
 				        Joined in 2014
 				      </span><br></br>
 				      <span>
-				        <i className="user icon"></i>
+				        <i className="user icon" onClick={this.test}></i>
 				        151 Friends
 				      </span>
 				    </div>
