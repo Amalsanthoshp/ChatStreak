@@ -22,6 +22,7 @@ class ChatScreen extends React.Component {
 			for (var i = 0; i < numberOfMessage ; i++) {
 				    rows.push(<div key={i} className="item">
 				    	<Feed 
+				    	id={this.props.feed.message_send[i].id}
 				    	image="https://cbsnews1.cbsistatic.com/hub/i/2016/03/23/38e32f54-b910-4612-8852-be9e0fbdbf73/cat-istock.jpg"
 				    	message={this.props.feed.message_send[i].message}
 				    	time={this.props.feed.message_send[i].sent_time}

@@ -1,6 +1,4 @@
 import React from 'react';
-import Container from '@material-ui/core/Container';
-import { AppBar } from '@material-ui/core';
 import './style.css';
 import ChatScreen from './Components/Chat-screen'
 import IndividualChat from './Components/Indivdual-chat';
