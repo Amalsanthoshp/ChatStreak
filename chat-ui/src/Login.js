@@ -1,12 +1,22 @@
 import React from 'react';
 import axios from 'axios';
+import * as Axios from './Axios/Axios';
 
 
 class Login extends React.Component {
 
 	constructor() {
 		super()
+	this.handleClick= this.handleClick.bind(this);
 	}
+
+	handleClick(){
+		let username = document.getElementById('username').value
+		let password = document.getElementById('password').value
+		console.log(username)
+	  	Axios.postLogin(username,password,'http://localhost:8000/api/auth/token/obtain/')
+	}
+
 	render(){
 
 		return(
@@ -18,18 +28,18 @@ class Login extends React.Component {
 				        <div className="field">
 				          <label>Username</label>
 				          <div className="ui left icon input">
-				            <input type="text" placeholder="Username"/>
+				            <input type="text" placeholder="Username" id='username'/>
 				            <i className="user icon"></i>
 				          </div>
 				        </div>
 				        <div className="field">
 				          <label>Password</label>
 				          <div className="ui left icon input">
-				            <input type="password"/>
+				            <input type="password" placeholder="Password" id='password'/>
 				            <i className="lock icon"></i>
 				          </div>
 				        </div>
-				        <div className="ui blue submit button">Login</div>
+				        <div className="ui blue submit button" onClick={this.handleClick}>Login</div>
 				      </div>
 				    </div>
 				    <div className="middle aligned column">
