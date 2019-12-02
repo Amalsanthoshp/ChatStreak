@@ -46,3 +46,12 @@ def message_send(request):
 	if message:
 		queryset = Chat.objects.create(user_sent=send_id,user_recevied=recevied_id,message=message,sent_time=now)
 	return HttpResponse(message)
+
+
+class RecentChatList(generics.ListCreateAPIView):
+	queryset = Person.objects.all().select_related()
+	serializer_class = RecentChatSerializer
+
+class RecentChatDetail(generics.RetrieveUpdateDestroyAPIView):
+	queryset = Person.objects.all().select_related()
+	serializer_class = RecentChatSerializer	

@@ -30,6 +30,8 @@ urlpatterns = [
     path('chat/<int:pk>/',DetailUser.as_view()),
     path('group_chat/',ListGroup.as_view()),
     path('message_send/',message_send,name='message_send'),
+    path('recent/', RecentChatList.as_view(),name='recent_chat_list'),
+    path('recent/<int:pk>/', RecentChatDetail.as_view(),name='recent_chat_detail'),
     path('auth/token/obtain/', TokenObtainPairView.as_view()),
     path('auth/token/refresh/', TokenRefreshView.as_view()),
     path('auth/token/verify/', TokenVerifyView.as_view(), name='token_verify'),
