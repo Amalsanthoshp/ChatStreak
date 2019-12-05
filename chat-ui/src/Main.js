@@ -12,10 +12,10 @@ class Main extends Component {
   render() {
     return (
       <Router history={history}>
-        <div className="ui three item menu">
-		  <a className="active item">Editorials</a>
-		  <a className="item">Reviews</a>
-		  <a className="item">Upcoming Events</a>
+        <div className="ui three item menu" style={{background:'transparent'}}>
+		  <div className="active item">Editorials</div>
+		  <div className="item">Reviews</div>
+		  <div className="item">Upcoming Events</div>
 		</div>
           {/*<ul className="header">
             <li><a href="/">Home</a></li>
