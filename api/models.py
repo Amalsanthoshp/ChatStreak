@@ -1,5 +1,4 @@
 from __future__ import unicode_literals
-
 from django.db import models
 from django.core.mail import send_mail
 from django.contrib.auth.models import PermissionsMixin
@@ -39,8 +38,8 @@ class Person(AbstractUser):
 
 
 class Chat(models.Model):
-	user_sent = models.ForeignKey(Person,_('Sender'),related_name='Sender')
-	user_recevied = models.ForeignKey(Person,_('Reciever'),related_name='Reciever')
+	user_sent = models.ForeignKey(Person,related_name='Sender',on_delete=models.CASCADE)
+	user_recevied = models.ForeignKey(Person,related_name='Reciever',on_delete=models.CASCADE)
 	message = models.CharField(_('Message'),max_length=500)
 	sent_time = models.DateTimeField(_('Send at'),auto_now_add=True)
 	delivered_time = models.DateTimeField(_('Delivered at'),null=True,blank=True)

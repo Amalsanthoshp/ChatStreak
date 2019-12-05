@@ -26,7 +26,6 @@ class PersonSerializer(serializers.ModelSerializer):
 	message_send = serializers.SerializerMethodField('get_messageSent')
 	message_recieved = serializers.SerializerMethodField('get_messageRecieved')
 	message_recieved_count = serializers.SerializerMethodField('get_messageRecievedCount')
-	h = serializers.HyperlinkedRelatedField(view_name='recent_chat_list-list',read_only=False)
 	class Meta:
 		fields = '__all__'
 		model = Person
