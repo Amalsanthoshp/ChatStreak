@@ -14,7 +14,7 @@ class Login extends React.Component {
 		let username = document.getElementById('username').value
 		let password = document.getElementById('password').value
 		console.log(username)
-	  	Axios.postLogin(username,password,'http://localhost:8000/api/auth/token/obtain/')
+	  	Axios.postLogin(username,password,'https://chatstreak.herokuapp.com/api/auth/token/obtain/')
 	}
 
 	render(){
