@@ -12,10 +12,8 @@ class Main extends Component {
   render() {
     return (
       <Router history={history}>
-        <div className="ui three item menu" style={{background:'transparent'}}>
-		  <div className="active item">Editorials</div>
-		  <div className="item">Reviews</div>
-		  <div className="item">Upcoming Events</div>
+        <div className="ui one item menu" style={{background:'transparent'}}>
+		  <div className="item" style={{justifyContent:'center'}}> <span role="img" style={{fontSize:'1.5rem'}} aria-label="fire">🔥</span> Streakchat</div>
 		</div>
           {/*<ul className="header">
             <li><a href="/">Home</a></li>

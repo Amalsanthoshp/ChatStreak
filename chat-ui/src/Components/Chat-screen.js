@@ -38,12 +38,14 @@ class ChatScreen extends React.Component {
 
 		return(
 				<div id='main' className="ui segment" style={{height:'100vh',borderRadius:'0',paddingLeft:'.5rem',paddingRight:'.5rem',paddingTop:'0'}}>
-					<div className="ui two item menu" style={{marginBottom:'0'}}>
-					  <div className="item" style={{justifyContent:'left'}}>
+					<div className="ui one item menu" style={{marginBottom:'0'}}>
+					  <div className="item"  style={{justifyContent:'space-between'}}>
+					    <div>
 					  	 <img className="ui avatar image" src="https://semantic-ui.com/images/avatar/small/jenny.jpg"/>
 						 <span><b>{this.props.feed.username}</b></span>
+						</div>
+						 <div style={{justifyContent:'flex-end'}}><i className="cog icon" style={{fontSize:'1.5rem',color:'green'}}></i></div>
 					  </div>
-					  <div className="item"style={{justifyContent:'flex-end'}}><i className="cog icon" style={{fontSize:'1.5rem',color:'green'}}></i></div>
 					</div>
 					<div className="ui segment" style={{height:'85vh',overflow:'scroll',paddingTop:'0',paddingBottom:'0',marginTop:'0',marginBottom:'0'}}>
 						<div className="ui list" style={{width:'100%'}}>
