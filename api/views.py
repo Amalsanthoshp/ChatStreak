@@ -57,6 +57,7 @@ class RecentChatDetail(generics.RetrieveUpdateDestroyAPIView):
 	serializer_class = RecentChatSerializer	
 
 
+
 from django.shortcuts import render
 
 # Create your views here.
@@ -93,3 +94,7 @@ class UserList(APIView):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)	
+
+def Test(request):
+    return HttpResponse("hello")
+
