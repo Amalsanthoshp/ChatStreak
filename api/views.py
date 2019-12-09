@@ -55,3 +55,6 @@ class RecentChatList(generics.ListCreateAPIView):
 class RecentChatDetail(generics.RetrieveUpdateDestroyAPIView):
 	queryset = Person.objects.all().select_related()
 	serializer_class = RecentChatSerializer	
+
+def Test(request):
+    return HttpResponse("hello")
