@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include
 from django.contrib.auth import views as auth_views
+from .views import current_user, UserList
 from .views import *
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
@@ -23,6 +24,8 @@ from rest_framework_simplejwt.views import (
 
 
 urlpatterns = [
+    path('current_user/', current_user),
+    path('users/', UserList.as_view()),
     path('home/',home,name='home'),
     path('',chat_screen,name='chat'),
     path('login/', auth_views.LoginView.as_view(template_name='registration/login.html')),
