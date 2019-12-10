@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import Chat from './Chat';
-import Login from './Login';
 import {
   Router,
   Route,
   NavLink,
   HashRouter
 } from "react-router-dom";
-import history from './Axios/History';
+import history from './utils/History';
+import LoginForm from './Authentication/LoginForm'
 class Main extends Component {
   render() {
     return (
@@ -21,7 +21,7 @@ class Main extends Component {
             <li><a href="/contact">Contact</a></li>
           </ul>*/}
           <div className="ui container fluid" style={{height:'100vh'}}>
-             <Route path="/login" component={Login}/>
+             <Route path="/login" component={LoginForm}/>
              <Route path="/home" component={Chat}/>
           </div>
        </Router>
