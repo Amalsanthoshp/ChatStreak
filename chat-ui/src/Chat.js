@@ -4,7 +4,7 @@ import ChatScreen from './Components/Chat-screen'
 import IndividualChat from './Components/Indivdual-chat';
 import axios from 'axios';
 import Cookies from 'js-cookie';
-import * as Axios from './Axios/Axios';
+import * as Axios from './utils/Axios';
 
 
 class Chat extends React.Component {
@@ -32,7 +32,7 @@ class Chat extends React.Component {
 	        const persons = res.data;
 	        this.setState({ persons });
 	  		})
-	      return Axios.tokenVerify('https://chatstreak.herokuapp.com/api/auth/token/verify/')
+	      
 	  }
 	  test() {
 	  	Axios.tokenVerify('https://chatstreak.herokuapp.com/api/auth/token/verify/')
