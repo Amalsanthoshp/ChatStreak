@@ -15,6 +15,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
+from rest_framework_jwt.views import obtain_jwt_token,refresh_jwt_token,verify_jwt_token
+
 from django.contrib.auth import views as auth_views
 from .views import current_user, UserList
 from .views import *
@@ -35,9 +37,9 @@ urlpatterns = [
     path('message_send/',message_send,name='message_send'),
     path('recent/', RecentChatList.as_view(),name='recent_chat_list'),
     path('recent/<int:pk>/', RecentChatDetail.as_view(),name='recent_chat_detail'),
-    path('auth/token/obtain/', TokenObtainPairView.as_view()),
-    path('auth/token/refresh/', TokenRefreshView.as_view()),
-    path('auth/token/verify/', TokenVerifyView.as_view(), name='token_verify'),
+    path('token-auth/', obtain_jwt_token),
+    path('token-refresh/', refresh_jwt_token),
+    path('token-verify/',verify_jwt_token)
 
 
 ]
