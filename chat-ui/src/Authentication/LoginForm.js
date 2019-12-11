@@ -31,24 +31,25 @@ class LoginForm extends React.Component {
 		let username = document.getElementById('username').value;
 		let password = document.getElementById('pass').value;
 		let url = 'http://localhost:8000/api/token-auth/';
+		if (username && password){
 		Axios.postLogin(username,password,url)
+		}
 	}
 	handleSignup() {
-
-		this.setState(
-		{
-			isSignup:true
-		})
+		this.setState(prevState => ({
+ 				 isSignup: !prevState.isSignup
+			}));
 
 	}
 
 	render(){
 
  		let login =  !this.state.isSignup  && 
- 		<div id='login' className="ui placeholder segment" style={{height:'60vh',width:'900px',margin:'0 auto'}}>
+ 		<div id='login' className="ui placeholder segment auth" style={{height:'60vh',width:'900px',margin:'0 auto',background:'white'}}>
 				  <div className="ui two column very relaxed stackable grid">
 				    <div className="column">
 				      <div className="ui form">
+				        <h2 style={{textAlign:'center',margin:'0',marginBottom:'2rem'}}> Sign in <i className="bolt icon"></i></h2>
 				        <div className="field">
 				          <label>Username</label>
 				          <div className="ui left icon input">
@@ -73,13 +74,13 @@ class LoginForm extends React.Component {
 				      </div>
 				    </div>
 				  </div>
-				  <div id='divider' className="ui vertical divider">
+				  <div id='divider' className="ui vertical divider" style={{background:'transparent'}}>
 				    Or
 				  </div>
 				</div> 
 		  let signup = this.state.isSignup  &&
-		  <div id='signup' className='ui segment' style={{width:'900px',margin:'0 auto'}}>
-		   <h2 style={{textAlign:'center'}}> Signup </h2>                      
+		  <div id='signup' className='ui segment auth' style={{width:'900px',margin:'0 auto',background:'white'}}>
+		   <i className="arrow alternate circle left outline icon" onClick={this.handleSignup} style={{fontSize:'2rem',color:'black'}}></i><h2 style={{textAlign:'center',margin:'0'}}> Signup <i className="edit outline icon"></i></h2>                      
 		   <form className="ui form" style={{padding:'2rem'}}>
 		   <div className='two fields'>
 			<div className="field">
@@ -98,17 +99,17 @@ class LoginForm extends React.Component {
 			   </div>
 			   <div className="field">
 			   <label>Username</label>
-				  <input type="text" name="username" placeholder="username"/>
+				  <input type="text" name="username" placeholder="Username"/>
 			   </div>
 			  </div>
 			 <div className='two fields'>
 			   <div className="field">
 			   <label>Password</label>
-				  <input type="password" name="password" placeholder="password"/>
+				  <input type="password" name="password" placeholder="Password"/>
 			   </div>
 			   <div className="field">
 			   <label>Confirm Password</label>
-				  <input type="password" name="conf-password" placeholder="conf-password"/>
+				  <input type="password" name="conf-password" placeholder="Confirm-Password"/>
 			   </div>
 			  </div>
 				  <div className="field">
