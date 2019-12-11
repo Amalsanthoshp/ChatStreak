@@ -35,14 +35,16 @@ class Chat extends React.Component {
 	      
 	  }
 	  test() {
-	  	Axios.tokenVerify('https://chatstreak.herokuapp.com/api/auth/token/verify/')
+	  	console.log('verifying')
 	  }
 	  
 	  handleClick(){
 	    let message = document.getElementById('message').value
-	  	Axios.postMessage(message,'test','hell','https://chatstreak.herokuapp.com/api/message_send/')
-	  	this.getMessage();
-	  	console.log(this.state.persons)
+	    if (message){
+		  	Axios.postMessage(message,'test','hell','https://chatstreak.herokuapp.com/api/message_send/')
+		  	this.getMessage();
+		    console.log(this.state.persons)
+	    }
 
 	 }
 	  
