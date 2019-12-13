@@ -50,25 +50,25 @@ class LoginForm extends React.Component {
 				    <div className="column">
 				      <div className="ui form">
 				        <h2 style={{textAlign:'center',margin:'0',marginBottom:'2rem'}}> Sign in <i className="bolt icon"></i></h2>
-				        <div className="field">
+				        <div id='username-field' className="field">
 				          <label>Username</label>
 				          <div className="ui left icon input">
 				            <input id="username" type="text" placeholder="Username"/>
 				            <i className="user icon"></i>
 				          </div>
 				        </div>
-				        <div className="field">
+				        <div id='password-field' className="field">
 				          <label>Password</label>
 				          <div className="ui left icon input">
 				            <input id="pass" type="password"/>
 				            <i className="lock icon"></i>
 				          </div>
 				        </div>
-				        <div className="ui blue submit button" onClick={this.handleLogin}>Login</div>
+				        <div className="ui blue submit bt button" onClick={this.handleLogin}>Login</div>
 				      </div>
 				    </div>
 				    <div className="middle aligned column">
-				      <div className="ui big button" onClick={this.handleSignup}>
+				      <div className="ui big button bt" onClick={this.handleSignup}>
 				        <i className="signup icon"></i>
 				        Sign Up
 				      </div>
@@ -118,7 +118,7 @@ class LoginForm extends React.Component {
 		        <label>I agree to the Terms and Conditions</label>
 		       </div>
 			 </div>
-		   <button className="ui button" type="submit">Submit</button>
+		   <button className="ui button bt" type="submit">Submit</button>
          </form>
         </div>  
 		 return(

@@ -47,7 +47,15 @@ export function postLogin(username,password,url){
 		     }})
 		    .catch(function (error) {
 			    if (error.response) {
-			      if(error.response.status =='401'){
+			      if(error.response.status =='401' || error.response.status == '400'){
+			      	
+					function err(id){
+						var d = document.getElementById(id);
+						d.className += " error";
+
+					}
+					err('username-field')
+					err('password-field')
 			      	alert('Invalid Username or Password !!')
 			      }
 			    }
