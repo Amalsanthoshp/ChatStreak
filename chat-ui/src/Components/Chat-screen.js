@@ -7,11 +7,8 @@ class ChatScreen extends React.Component {
 
 	constructor(){
 		super()
-	this.test = this.test.bind(this);
 	}
-	test () {
-		alert('')
-	}
+
 
 
 	render(){
@@ -53,7 +50,7 @@ class ChatScreen extends React.Component {
 						</div>
 					</div>	
 				   <div className="ui fluid action input">
-				   	  <button className="ui button"><i className="upload icon" onClick={this.test}></i></button>
+				   	  <button className="ui button"><i className="upload icon"></i></button>
 					 <input type="text" placeholder="Search..." id="message"/>
 					  <div className=" small ui button" onClick={this.props.clickHandler}><i className="paper plane outline icon" style={{fontSize:'1.5rem'}}></i></div>
 				   </div>

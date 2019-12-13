@@ -2,8 +2,9 @@ import React from 'react';
 import axios from 'axios';
 import history from './History';
 
+var id = null
 
-export function postMessage(para1,para2,para3,url){
+export function postMessage(message,send_by,receive_by,url){
 	axios.defaults.xsrfHeaderName = "X-CSRFToken";
 		axios.defaults.xsrfCookieName = "csrftoken";
 	    function getCookie(name) {
@@ -26,9 +27,95 @@ export function postMessage(para1,para2,para3,url){
 	  	  axios.post(url, 
 
 	  	  		{
-		            'message':para1,
-		            'send_to':para2,
-		            'test':para3,
+		            'message':message,
+		            'send_by':send_by,
+		            'receive_by':receive_by,
+		        },
+		        {
+		            headers: {
+		                "Content-Type": 'application/json',
+		                'X-CSRFTOKEN': csrftoken,
+
+					
+
+		            },
+		        }	
+		    )
+		    .then(res => console.log(res))
+		    .catch(error => console.log(error))
+}
+
+
+
+export function getUser(url){
+	axios.defaults.xsrfHeaderName = "X-CSRFToken";
+		axios.defaults.xsrfCookieName = "csrftoken";
+	    function getCookie(name) {
+		    var cookieValue = null;
+		    if (document.cookie && document.cookie !== '') {
+		        var cookies = document.cookie.split(';');
+		        for (var i = 0; i < cookies.length; i++) {
+		            var cookie = cookies[i].trim();
+		            // Does this cookie string begin with the name we want?
+		            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+		                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+		                break;
+		            }
+		        }
+		    }
+		    return cookieValue;
+		}
+		var csrftoken = getCookie('csrftoken');
+		console.log(csrftoken)
+		let Token = localStorage.getItem('token')
+		var config = {
+		    headers: {'Authorization' : "JWT " + Token}
+		};		            		                
+
+	  	return axios.get(url,config)
+		    .then(function (res){
+		    	if (res.status=='200'){
+		    	console.log(res);
+		     	console.log('user selected')
+		     	return res
+
+		     }})
+		    .catch(function (error) {
+			    if (error.response) {
+			      if(error.response.status =='400' || error.response.status =='401'){
+			      	return false
+			      }
+			    }
+			  })
+		    
+
+}
+
+export function homeTokenVerify(url){
+	axios.defaults.xsrfHeaderName = "X-CSRFToken";
+		axios.defaults.xsrfCookieName = "csrftoken";
+	    function getCookie(name) {
+		    var cookieValue = null;
+		    if (document.cookie && document.cookie !== '') {
+		        var cookies = document.cookie.split(';');
+		        for (var i = 0; i < cookies.length; i++) {
+		            var cookie = cookies[i].trim();
+		            // Does this cookie string begin with the name we want?
+		            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+		                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+		                break;
+		            }
+		        }
+		    }
+		    return cookieValue;
+		}
+		var csrftoken = getCookie('csrftoken');
+		console.log(csrftoken)
+		let Token = localStorage.getItem('token')
+	  	return axios.post(url, 
+
+	  	  		{
+		            'token':Token,
 		        },
 		        {
 		            headers: {
@@ -40,14 +127,67 @@ export function postMessage(para1,para2,para3,url){
 		            },
 		        }
 		    )
-		    .then(res => console.log(res))
-		    .catch(error => console.log(error))
+		    .then(function (res){
+		    	if (res.status=='200'){
+		    	console.log(res.data.user.id);
+		     	console.log('Token Verified !!')
+		     	id = res.data.user.id
+		     	return (id);
+
+		     }})
+		    .catch(function (error) {
+			    if (error.response) {
+			      if(error.response.status =='400' || error.response.status =='401'){
+			      	history.replace('/login')
+			      	// return false
+			      }
+			    }
+			  })
+} 
+
+
+
+
+export function getRecent(url){
+	axios.defaults.xsrfHeaderName = "X-CSRFToken";
+		axios.defaults.xsrfCookieName = "csrftoken";
+	    function getCookie(name) {
+		    var cookieValue = null;
+		    if (document.cookie && document.cookie !== '') {
+		        var cookies = document.cookie.split(';');
+		        for (var i = 0; i < cookies.length; i++) {
+		            var cookie = cookies[i].trim();
+		            // Does this cookie string begin with the name we want?
+		            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+		                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+		                break;
+		            }
+		        }
+		    }
+		    return cookieValue;
+		}
+		var csrftoken = getCookie('csrftoken');
+		console.log(csrftoken)
+		let Token = localStorage.getItem('token')
+		var config = {
+		    headers: {'Authorization' : "JWT " + Token}
+		};		            		                
+
+	  	return axios.get(url,config)
+		    .then(function (res){
+		    	if (res.status=='200'){
+		    	console.log(res);
+		     	console.log('user selected')
+		     	return res
+
+		     }})
+		    .catch(function (error) {
+			    if (error.response) {
+			      if(error.response.status =='400' || error.response.status =='401'){
+			      	return error
+			      }
+			    }
+			  })
+		    
+
 }
-
-
-
-
-
-
-
-
