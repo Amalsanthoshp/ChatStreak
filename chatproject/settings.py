@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+import datetime
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -40,7 +41,6 @@ INSTALLED_APPS = [
     'api',
     'rest_framework',
     'corsheaders',
-
 ]
 
 MIDDLEWARE = [
@@ -130,31 +130,31 @@ STATIC_URL = '/static/'
 AUTH_USER_MODEL = "api.Person" 
 
 
-
-
-
 REST_FRAMEWORK = {
-    # Use Django's standard `django.contrib.auth` permissions,
-    # or allow read-only access for unauthenticated users.
-    'DEFAULT_PERMISSION_CLASSES': [
-        # 'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
-                'rest_framework.permissions.IsAuthenticated',
-
-    ],
-    'DEFAULT_AUTHENTICATION_CLASSES':(
-    'rest_framework_simplejwt.authentication.JWTAuthentication',
-    'rest_framework.authentication.SessionAuthentication',
-    'rest_framework.authentication.BasicAuthentication'
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
     ),
 }
 
-CORS_ORIGIN_WHITELIST = [
-'http://localhost:3000',
-]
+CORS_ORIGIN_WHITELIST = (
+    'http://localhost:3000',
+)
+
+CORS_ALLOW_CREDENTIALS = True
 
 JWT_AUTH = {
     'JWT_RESPONSE_PAYLOAD_HANDLER': 'api.utils.my_jwt_response_handler',
     'JWT_ALLOW_REFRESH': True,
+    'JWT_EXPIRATION_DELTA': datetime.timedelta(hours=1),
+
+    
+    'JWT_PAYLOAD_GET_USER_ID_HANDLER':
+    'rest_framework_jwt.utils.jwt_get_user_id_from_payload_handler',
 }
 
 
