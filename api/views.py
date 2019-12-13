@@ -8,6 +8,12 @@ from django.views.decorators.csrf import csrf_protect
 from django.utils.decorators import method_decorator
 import json
 from django.utils import timezone
+from rest_framework.decorators import api_view, authentication_classes, permission_classes
+from rest_framework.authentication import TokenAuthentication
+from rest_framework.permissions import IsAuthenticated
+from rest_framework import authentication, permissions
+
+
 
 
 # Create your views here.
@@ -23,8 +29,10 @@ def chat_screen(request):
 
 
 class ListUser(generics.ListCreateAPIView):
-    queryset = Person.objects.all().select_related()
-    serializer_class = PersonSerializer
+	queryset = Person.objects.all().select_related()
+	serializer_class = PersonSerializer
+	authentication_classes = (TokenAuthentication)
+
 
 class DetailUser(generics.RetrieveUpdateDestroyAPIView):
     queryset = Person.objects.all().select_related()
@@ -39,10 +47,11 @@ def message_send(request):
 	body_unicode = request.body.decode('utf-8')
 	body = json.loads(body_unicode)
 	message = body['message']
-	send_to = body['send_to']
+	send_by = body['send_by']
+	receive_by = body['receive_by']
 	now = timezone.now()
-	send_id = Person.objects.get(id=1)
-	recevied_id = Person.objects.get(id=2)
+	send_id = Person.objects.get(id=send_by)
+	recevied_id = Person.objects.get(id=receive_by)
 	if message:
 		queryset = Chat.objects.create(user_sent=send_id,user_recevied=recevied_id,message=message,sent_time=now)
 	return HttpResponse(message)
