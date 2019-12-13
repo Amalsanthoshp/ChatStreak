@@ -24,8 +24,7 @@ class MessageSerializer(serializers.ModelSerializer):
 		fields = '__all__'
 		model = Chat
 
-class PersonSerializer(serializers.HyperlinkedModelSerializer):
-	recent_message = RecentChatSerializer(read_only=True,many=True)
+class PersonSerializer(serializers.ModelSerializer):
 	message_send = serializers.SerializerMethodField('get_messageSent')
 	message_recieved = serializers.SerializerMethodField('get_messageRecieved')
 	message_recieved_count = serializers.SerializerMethodField('get_messageRecievedCount')
@@ -61,7 +60,7 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Person
-        fields = ('username','password')
+        fields = ('id','username','password')
 
 
 class UserSerializerWithToken(serializers.ModelSerializer):
