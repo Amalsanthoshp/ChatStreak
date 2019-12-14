@@ -7,15 +7,6 @@ from rest_framework_jwt.settings import api_settings
 from api.models import Person
 
 
-class RecentChatSerializer(serializers.ModelSerializer):
-	recentMessages_ReceivedAndSend = serializers.SerializerMethodField('get_recentMessageRandS')
-	class Meta:
-		fields= ['username','recentMessages_ReceivedAndSend']
-		model = Person
-
-
-	def get_recentMessageRandS(self,obj):
-		return Chat.objects.filter(Q(user_recevied=obj.id) |Q(user_sent=obj.id)).order_by('-sent_time').values()
 
 
 class MessageSerializer(serializers.ModelSerializer):
@@ -23,6 +14,19 @@ class MessageSerializer(serializers.ModelSerializer):
 	class Meta:
 		fields = '__all__'
 		model = Chat
+
+
+
+class RecentChatSerializer(serializers.ModelSerializer):
+	recentMessages_ReceivedAndSend = serializers.SerializerMethodField('get_recentMessageRandS')
+	class Meta:
+		fields= ['username','recentMessages_ReceivedAndSend']
+		model = Person
+
+	def get_recentMessageRandS(self,obj):
+		return Chat.objects.filter(Q(user_recevied=obj.id) |Q(user_sent=obj.id)).order_by('-sent_time').values().distinct('user_sent_id')
+
+
 
 class PersonSerializer(serializers.ModelSerializer):
 	message_send = serializers.SerializerMethodField('get_messageSent')
