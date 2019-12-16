@@ -1,6 +1,8 @@
 import React from 'react';
 import axios from 'axios';
 import history from './History';
+import cogoToast from 'cogo-toast';
+
 
 var id = null
 
@@ -190,4 +192,11 @@ export function getRecent(url){
 			  })
 		    
 
+}
+
+
+export function logOut(url){
+		 localStorage.setItem('token', null);
+		 cogoToast.success('Logged Out Successfully 👋',{color:'green',hideAfter:2});
+		 history.replace('/login');   
 }
