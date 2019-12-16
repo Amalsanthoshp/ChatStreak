@@ -6,6 +6,8 @@ import Recent from './Components/Recent';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import * as Axios from './utils/Axios';
+import cogoToast from 'cogo-toast';
+
 
 
 class Chat extends React.Component {
@@ -65,7 +67,7 @@ class Chat extends React.Component {
 
 	 }
 	 test() {
-	 	alert('hai')
+		Axios.logOut();
 	 }
 	  
 
@@ -76,7 +78,7 @@ class Chat extends React.Component {
 			<div className="ui internally grid">
 			  <div className="row" style={{paddingTop:'0',paddingBottom:'0'}}>
 			    <div id='side-bar-left' className="three wide column" style={{paddingLeft:'0',paddingRight:'0'}}>
-			    <div id='side-left' className='ui segment' style={{height:'100vh',borderRadius:'0',background:'transparent'}}>
+			    <div id='side-left' className='ui segment' style={{height:'100vh',borderRadius:'0',background:'transparent',paddingTop:'5px',paddingBottom:'5px'}}>
 			     <div className="card center" style={{textAlign:'center'}}>
 				    <div className="ui centered small circular image">
 				      <img src="https://semantic-ui.com/images/avatar2/large/kristy.png"/>
@@ -84,7 +86,7 @@ class Chat extends React.Component {
 				    <div className="content">
 				      <div className="header"><h2>{this.state.person.username}</h2></div>
 				      <div className="meta">
-				        <a>Coworker &nbsp;</a><i className="edit icon" style={{fontSize:'1rem',color:'black'}} ></i>
+				        <a>Coworker &nbsp;</a><i className="edit icon" style={{fontSize:'1rem',color:'black'}} onClick={this.test} ></i>
 				      </div>
 				      <div className="description">
 				        Elyse is a copywriter working in New York.
@@ -95,7 +97,7 @@ class Chat extends React.Component {
 				        Joined in 2014
 				      </span><br></br>
 				      <span>
-				        <i className="user icon" onClick={this.test}></i>
+				        <i className="user icon"></i>
 				        151 Friends
 				      </span>
 				    </div>
