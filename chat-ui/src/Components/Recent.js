@@ -15,7 +15,7 @@ class Recent extends React.Component {
 				    rows.push(<span key={i} className='item'>
 				    	<IndividualChat
 				    	 id = {this.props.chat[i].id}
-				    	 name= {this.props.chat[i].user_sent_id}
+				    	 name= {this.props.chat[i].user_recevied_id}
 				    	 message={this.props.chat[i].message}
 				    	 time={this.props.chat[i].time}
 				    	 /></span>);
@@ -24,6 +24,7 @@ class Recent extends React.Component {
 		 else{
 		 	let rows = <div> Loading....</div>
 		 }
+		 let row = rows ? rows :<p> Loading...</p>
 
 		return (
 				 <div className="ui list fluid" style={{overflow:'scroll',height:'36vh'}}>
@@ -38,3 +39,6 @@ class Recent extends React.Component {
 }
 
 export default Recent;
+
+
+

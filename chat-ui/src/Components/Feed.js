@@ -1,4 +1,5 @@
 import React from 'react';
+import cogoToast from 'cogo-toast';
 
 
 class Feed extends React.Component {
@@ -8,8 +9,10 @@ class Feed extends React.Component {
 
 	}
 	componentDidUpdate(prevProps) {
-		  if (this.props.message !== prevProps.message) {
-		    this.fetchData(this.props.message);
+		  if (this.props.id !== prevProps.id) {
+		    cogoToast.success('New Message Arrived','bottom-center');
+		    this.fetchData(this.props.id);
+
 		  }
 		}
 	render(){
