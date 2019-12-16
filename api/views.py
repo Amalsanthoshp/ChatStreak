@@ -12,6 +12,14 @@ from rest_framework.decorators import api_view, authentication_classes, permissi
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 from rest_framework import authentication, permissions
+from django.shortcuts import render
+from django.http import HttpResponseRedirect
+from django.contrib.auth.models import User
+from rest_framework import permissions, status
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from .serializers import UserSerializer, UserSerializerWithToken
 
 
 
@@ -67,17 +75,6 @@ class RecentChatDetail(generics.RetrieveUpdateDestroyAPIView):
 
 
 
-from django.shortcuts import render
-
-# Create your views here.
-from django.http import HttpResponseRedirect
-from django.contrib.auth.models import User
-from rest_framework import permissions, status
-from rest_framework.decorators import api_view
-from rest_framework.response import Response
-from rest_framework.views import APIView
-from .serializers import UserSerializer, UserSerializerWithToken
-
 
 @api_view(['GET'])
 def current_user(request):
@@ -104,6 +101,7 @@ class UserList(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)	
 
-def Test(request):
-    return HttpResponse("hello")
+def LogOut(request):
+	user = request.user
+	return HttpResponse(user.username)
 

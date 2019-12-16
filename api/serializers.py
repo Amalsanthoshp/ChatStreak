@@ -24,7 +24,7 @@ class RecentChatSerializer(serializers.ModelSerializer):
 		model = Person
 
 	def get_recentMessageRandS(self,obj):
-		return Chat.objects.filter(Q(user_recevied=obj.id) |Q(user_sent=obj.id)).order_by('-sent_time').values().distinct('user_sent_id')
+		return Chat.objects.filter(Q(user_recevied=obj.id) |Q(user_sent=obj.id)).order_by('-sent_time').values()
 
 
 
