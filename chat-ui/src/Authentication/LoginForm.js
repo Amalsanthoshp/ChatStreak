@@ -1,6 +1,7 @@
 import React from 'react';
 import './Auth.css'
 import * as Axios from './auth_utils';
+import cogoToast from 'cogo-toast';
 
 
 
@@ -64,7 +65,9 @@ class LoginForm extends React.Component {
 				            <i className="lock icon"></i>
 				          </div>
 				        </div>
-				        <div className="ui blue submit bt button" onClick={this.handleLogin}>Login</div>
+				        <div>
+				        <i className="ui blue submit bt button" onClick={this.handleLogin}>Login</i>
+				        </div>
 				      </div>
 				    </div>
 				    <div className="middle aligned column">

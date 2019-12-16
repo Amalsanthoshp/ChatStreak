@@ -1,5 +1,7 @@
 import axios from 'axios';
 import history from '../utils/History';
+import cogoToast from 'cogo-toast';
+
 
 
 export function postLogin(username,password,url){
@@ -42,8 +44,10 @@ export function postLogin(username,password,url){
 		    	if (res.status=='200'){
 		    	console.log(res);
 		     	localStorage.setItem('token', res.data.token); 
+		     	cogoToast.success('Logged In Successfully 🤗',{color:'green',hideAfter:2});
 		     	history.replace('/home')
 		     	console.log(localStorage.getItem('token')); 
+
 		     }})
 		    .catch(function (error) {
 			    if (error.response) {
@@ -56,7 +60,7 @@ export function postLogin(username,password,url){
 					}
 					err('username-field')
 					err('password-field')
-			      	alert('Invalid Username or Password !!')
+					cogoToast.error('Username or Password is Incorrect !',{color:'green',hideAfter:2});
 			      }
 			    }
 			  })
