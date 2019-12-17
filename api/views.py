@@ -105,3 +105,11 @@ def LogOut(request):
 	user = request.user
 	return HttpResponse(user.username)
 
+def FeedDelete(request,pk):
+	chat=Chat.objects.get(id=pk)
+	if chat:
+		chat.delete()
+		return HttpResponse(status=200)
+	else:
+		return HttpResponse(status=400)	 																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																					
+
