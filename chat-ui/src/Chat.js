@@ -21,8 +21,10 @@ class Chat extends React.Component {
 	  this.handleClick =this.handleClick.bind(this);
 	  this.getMessage = this.getMessage.bind(this);
 	  this.test= this.test.bind(this);
+	  this.handleTime=this.handleTime.bind(this);
 
  }
+
  	getMessage(){
 	    Axios.getUser(`http://localhost:8000/api/chat/`+ this.state.person.id)
 	      .then(res => {
@@ -32,10 +34,22 @@ class Chat extends React.Component {
 			.catch((error) => {
 		        console.log(error);
 		    });
-	  }
-	 componentDidMount() {
-	 var self = this;
-	 Axios.homeTokenVerify(`http://localhost:8000/api/token-verify/`)
+	}
+	handleTime() {
+	 	Axios.getRecent('http://localhost:8000/api/recent/' + this.state.person.id)
+		  .then(res => {
+	      	console.log(res.data.recentMessages_ReceivedAndSend)
+	        const recent = res.data.recentMessages_ReceivedAndSend;
+	        this.setState({ recent });
+	  	})
+		this.getMessage()
+    }
+	componentDidMount() {
+	  this.timerID = setInterval(
+      () => this.handleTime(),
+      1000);
+	  var self = this;
+	  Axios.homeTokenVerify(`http://localhost:8000/api/token-verify/`)
 	 .then(function(response) {
 		  console.log(response);
 		  Axios.getRecent('http://localhost:8000/api/recent/' + response)
@@ -54,14 +68,17 @@ class Chat extends React.Component {
 			}.bind(this))
 			.catch((error) => {
 		        console.log(error);
-		    });
-	   }
-	  
+		    })
+	    }
+	   componentWillUnmount() {
+    		clearInterval(this.timerID);
+  		}
 	  handleClick(){
 	    let message = document.getElementById('message').value
 	    if (message){
 		  	Axios.postMessage(message,this.state.person.id,2,'http://localhost:8000/api/message_send/')
 		  	this.getMessage();
+		  	document.getElementById('message').value = '';
 		    console.log(this.state.person)
 	    }
 
@@ -69,7 +86,8 @@ class Chat extends React.Component {
 	 test() {
 		Axios.logOut();
 	 }
-	  
+	 
+	
 
 
 	render(){

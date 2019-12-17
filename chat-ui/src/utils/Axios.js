@@ -200,3 +200,4 @@ export function logOut(url){
 		 cogoToast.success('Logged Out Successfully 👋',{color:'green',hideAfter:2});
 		 history.replace('/login');   
 }
+

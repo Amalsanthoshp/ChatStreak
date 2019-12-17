@@ -14,7 +14,7 @@ class Recent extends React.Component {
 		 	for (var i = 0; i < numberOfMessage ; i++) {
 				    rows.push(<span key={i} className='item'>
 				    	<IndividualChat
-				    	 id = {this.props.chat[i].id}
+				    	 id = {this.props.chat[i].id +'_recentChat'}
 				    	 name= {this.props.chat[i].user_recevied_id}
 				    	 message={this.props.chat[i].message}
 				    	 time={this.props.chat[i].time}
