@@ -41,6 +41,7 @@ urlpatterns = [
     path('token-refresh/', refresh_jwt_token),
     path('token-verify/',verify_jwt_token),
     path('logout/',LogOut),
+    path('feed_delete/<int:pk>/',FeedDelete)
 
 
 ]
