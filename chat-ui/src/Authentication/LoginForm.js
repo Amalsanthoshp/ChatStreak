@@ -28,13 +28,14 @@ class LoginForm extends React.Component {
 		
 	 	 
 	}
-	handleLogin() {
+	handleLogin(event) {
 		let username = document.getElementById('username').value;
 		let password = document.getElementById('pass').value;
 		let url = 'http://localhost:8000/api/token-auth/';
 		if (username && password){
 		Axios.postLogin(username,password,url)
 		}
+		event.preventDefault();
 	}
 	handleSignup() {
 		this.setState(prevState => ({
@@ -49,7 +50,7 @@ class LoginForm extends React.Component {
  		<div id='login' className="ui placeholder segment auth" style={{height:'60vh',width:'900px',margin:'0 auto',background:'white'}}>
 				  <div className="ui two column very relaxed stackable grid">
 				    <div className="column">
-				      <div className="ui form">
+				    <form className='ui form' onSubmit={this.handleLogin}>
 				        <h2 style={{textAlign:'center',margin:'0',marginBottom:'2rem'}}> Sign in <i className="bolt icon"></i></h2>
 				        <div id='username-field' className="field">
 				          <label>Username</label>
@@ -61,14 +62,14 @@ class LoginForm extends React.Component {
 				        <div id='password-field' className="field">
 				          <label>Password</label>
 				          <div className="ui left icon input">
-				            <input id="pass" type="password"/>
+				            <input id="pass" type="password" placeholder="Password"/>
 				            <i className="lock icon"></i>
 				          </div>
 				        </div>
 				        <div>
-				        <i className="ui blue submit bt button" onClick={this.handleLogin}>Login</i>
+				        <button className="ui blue submit bt button" type="submit">Login</button>
 				        </div>
-				      </div>
+				      </form>
 				    </div>
 				    <div className="middle aligned column">
 				      <div className="ui big button bt" onClick={this.handleSignup}>
