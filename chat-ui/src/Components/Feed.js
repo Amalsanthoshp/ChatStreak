@@ -57,7 +57,7 @@ class Feed extends React.Component {
 					  	<span className='left floated'> {this.props.message}</span>
 					  	<span className="left floated time description">{this.props.time}</span> 
 					  	<span className='left floated' style={{background:'transparent'}}  onClick={this.handleClick}>
-					  	<div id={this.props.id +'_feed_'} className="ui icon top left wrench icon dropdown button" style={{padding:'1px'}}>
+					  	<div id={this.props.id +'_feed_'} className="ui floating dropdown icon button" style={{padding:'1px'}}>
 					  	 <div style={{color:'black'}}>✍</div>
 						  <div id={this.props.id +'_feed_settings'}className="menu" style={display}>
 						    <div className="item" onClick={this.handleEdit}>Edit</div>
