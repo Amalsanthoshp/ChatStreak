@@ -31,9 +31,10 @@ class LoginForm extends React.Component {
 	handleLogin(event) {
 		let username = document.getElementById('username').value;
 		let password = document.getElementById('pass').value;
-		let url = 'http://localhost:8000/api/token-auth/';
+		let url1 = 'http://localhost:8000/api/token-auth/';
+		let url2 = 'http://localhost:8000/api-auth/login/';
 		if (username && password){
-		Axios.postLogin(username,password,url)
+		Axios.postLogin(username,password,url1)
 		}
 		event.preventDefault();
 	}
