@@ -44,7 +44,7 @@ class ChatScreen extends React.Component {
 						 <div style={{justifyContent:'flex-end'}}><i className="cog icon" style={{fontSize:'1.5rem',color:'green'}}></i></div>
 					  </div>
 					</div>
-					<div className="ui segment" style={{height:'85vh',overflow:'scroll',paddingTop:'0',paddingBottom:'0',marginTop:'0',marginBottom:'0'}}>
+					<div id='main-chatscreen' className="ui segment" style={{height:'85vh',overflow:'scroll',paddingTop:'0',paddingBottom:'0',marginTop:'0',marginBottom:'0'}}>
 						<div className="ui list" style={{width:'100%'}}>
 						  {rows}
 						</div>
