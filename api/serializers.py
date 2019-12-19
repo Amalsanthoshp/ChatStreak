@@ -10,10 +10,19 @@ from api.models import Person
 
 
 class MessageSerializer(serializers.ModelSerializer):
-
+	# Sentmessages = serializers.SerializerMethodField('get_SentMessage')
+	# Receivedmessage =serializers.SerializerMethodField('get_ReceivedMessage')
 	class Meta:
 		fields = '__all__'
 		model = Chat
+
+	# def get_SentMessage(self,obj):
+	# 	return Chat.objects.filter(user_sent_id=obj.id).values()
+	# def get_ReceivedMessage(self,obj):
+	# 	return Chat.objects.filter(user_recevied_id=obj.id).values()
+
+
+
 
 
 
@@ -29,6 +38,7 @@ class RecentChatSerializer(serializers.ModelSerializer):
 
 
 class PersonSerializer(serializers.ModelSerializer):
+	recentMessages_ReceivedAndSend = serializers.SerializerMethodField('get_recentMessageRandS')
 	message_send = serializers.SerializerMethodField('get_messageSent')
 	message_recieved = serializers.SerializerMethodField('get_messageRecieved')
 	message_recieved_count = serializers.SerializerMethodField('get_messageRecievedCount')
@@ -44,6 +54,9 @@ class PersonSerializer(serializers.ModelSerializer):
 
 	def get_messageRecievedCount(self,obj):
 		return Chat.objects.filter(user_recevied=obj.id,delivered_time__isnull=True).count()
+
+	def get_recentMessageRandS(self,obj):
+		return Chat.objects.filter(Q(user_recevied=obj.id) |Q(user_sent=obj.id)).order_by('-sent_time').values()
 
 
 
@@ -91,3 +104,4 @@ class UserSerializerWithToken(serializers.ModelSerializer):
     class Meta:
         model = Person
         fields = ('token', 'username', 'password')
+
