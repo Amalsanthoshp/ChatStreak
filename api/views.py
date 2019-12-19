@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from .models import *
+from django.views import View
 from .serializers import *
 from rest_framework import generics
 from django.views.decorators.csrf import csrf_exempt
@@ -105,7 +106,7 @@ def LogOut(request):
 	user = request.user
 	return HttpResponse(user.username)
 
-def FeedDelete(request,pk):
+def FeedDeleteView(request,pk):
 	chat=Chat.objects.get(id=pk)
 	if chat:
 		chat.delete()
@@ -113,3 +114,22 @@ def FeedDelete(request,pk):
 	else:
 		return HttpResponse(status=400)	 																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																					
 
+
+
+class ChatMessageView(generics.ListCreateAPIView):
+
+	'''
+	Return Messages between two users
+	user send from request.user  and user received from pk
+
+	'''
+
+	queryset = Chat.objects.all()
+	serializer_class = MessageSerializer
+
+	def get_queryset(self):
+		return Chat.objects.filter(Q(user_sent_id=self.kwargs['pk']) & Q(user_recevied_id=2) | Q(user_sent_id=2) & Q(user_recevied_id=self.kwargs['pk']))
+	def list(self,request,pk,*args,**kwargs):
+		queryset = self.get_queryset()
+		serializer = MessageSerializer(queryset, many=True)
+		return Response(serializer.data)
