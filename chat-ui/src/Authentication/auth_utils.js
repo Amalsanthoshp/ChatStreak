@@ -4,7 +4,7 @@ import cogoToast from 'cogo-toast';
 
 
 
-export function postLogin(username,password,url){
+export function postLogin(username,password,url1,url2){
 	axios.defaults.xsrfHeaderName = "X-CSRFToken";
 		axios.defaults.xsrfCookieName = "csrftoken";
 	    function getCookie(name) {
@@ -24,7 +24,33 @@ export function postLogin(username,password,url){
 		}
 		var csrftoken = getCookie('csrftoken');
 		console.log(csrftoken)
-	  	  axios.post(url, 
+		axios.post(url2, 
+
+	  	  		{
+		            'username':username,
+		            'password':password,
+		        },
+		        {
+		            headers: {
+		                "Content-Type": 'application/json',
+		                'X-CSRFTOKEN': csrftoken,
+
+					
+
+		            },
+		        }
+		    )
+		    .then(function (res){
+		    	if (res.status=='200'){
+		    	alert("Logged In");
+		     	
+
+		     }})
+		    .catch(function (error) {
+		    	console.log(error);
+		    	
+		 })
+	  	  axios.post(url1, 
 
 	  	  		{
 		            'username':username,
@@ -64,6 +90,7 @@ export function postLogin(username,password,url){
 			      }
 			    }
 			  })
+		    
 		    
 
 }
