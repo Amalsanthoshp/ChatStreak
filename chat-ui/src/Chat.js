@@ -38,16 +38,15 @@ class Chat extends React.Component {
 	handleTime() {
 	 	Axios.getRecent('http://localhost:8000/api/recent/' + this.state.person.id)
 		  .then(res => {
-	      	console.log(res.data.recentMessages_ReceivedAndSend)
 	        const recent = res.data.recentMessages_ReceivedAndSend;
 	        this.setState({ recent });
 	  	})
 		this.getMessage()
     }
 	componentDidMount() {
-	  this.timerID = setInterval(
-      () => this.handleTime(),
-      1000);
+	  // this.timerID = setInterval(
+   //    () => this.handleTime(),
+   //    1000);
 	  var self = this;
 	  Axios.homeTokenVerify(`http://localhost:8000/api/token-verify/`)
 	 .then(function(response) {
@@ -70,9 +69,9 @@ class Chat extends React.Component {
 		        console.log(error);
 		    })
 	    }
-	   componentWillUnmount() {
-    		clearInterval(this.timerID);
-  		}
+	   // componentWillUnmount() {
+    // 		clearInterval(this.timerID);
+  		// }
 	  handleClick(){
 	    let message = document.getElementById('message').value
 	    if (message){
@@ -81,10 +80,11 @@ class Chat extends React.Component {
 		  	document.getElementById('message').value = '';
 		    console.log(this.state.person)
 	    }
-
+		
 	 }
 	 test() {
 		Axios.logOut();
+		
 	 }
 	 
 	
