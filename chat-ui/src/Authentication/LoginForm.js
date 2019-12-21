@@ -32,10 +32,11 @@ class LoginForm extends React.Component {
 		let username = document.getElementById('username').value;
 		let password = document.getElementById('pass').value;
 		let url1 = 'http://localhost:8000/api/token-auth/';
-		let url2 = 'http://localhost:8000/api-auth/login/';
+		let url2 = 'http://localhost:8000/api/test/';
+		// let url2 ='http://localhost:8000/admin/login/'
 		if (username && password){
-		Axios.postLogin(username,password,url1)
-		}
+			Axios.postLogin(username,password,url2)
+			}
 		event.preventDefault();
 	}
 	handleSignup() {
