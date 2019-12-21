@@ -21,13 +21,9 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from .serializers import UserSerializer, UserSerializerWithToken
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login ,logout
 
 
-
-
-
-# Create your views here.
 def home(request):
 	return render(request,template_name='index.html')
 
@@ -82,7 +78,7 @@ class RecentChatDetail(generics.RetrieveUpdateDestroyAPIView):
 @api_view(['GET'])
 def current_user(request):
     """
-    Determine the current user by their token, and return their data
+    Returning the current user with data use of token
     """
     
     serializer = UserSerializer(request.user)
@@ -105,8 +101,11 @@ class UserList(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)	
 
 def LogOut(request):
-	user = request.user
-	return HttpResponse(user.username)
+	if request.method == 'GET':
+		logout(request)
+		return HttpResponse(status=200)
+	return HttpResponse(status=400)
+
 
 def FeedDeleteView(request,pk):
 	chat=Chat.objects.get(id=pk)
@@ -130,27 +129,24 @@ class ChatMessageView(generics.ListCreateAPIView):
 	serializer_class = MessageSerializer
 
 	def get_queryset(self):
-		return Chat.objects.filter(Q(user_sent_id=self.kwargs['pk']) & Q(user_recevied_id=2) | Q(user_sent_id=2) & Q(user_recevied_id=self.kwargs['pk']))
+		return Chat.objects.filter(Q(user_sent_id=self.kwargs['pk']) & Q(user_recevied_id=self.request.user.id) | Q(user_sent_id=self.request.user.id) & Q(user_recevied_id=self.kwargs['pk']))
 	def list(self,request,pk,*args,**kwargs):
 		queryset = self.get_queryset()
 		serializer = MessageSerializer(queryset, many=True)
 		return Response(serializer.data)
 
-
-# @csrf_exempt 
+ 
 def userLogin(request):
 	if request.method == 'POST':
 		body_unicode = request.body.decode('utf-8')
 		body = json.loads(body_unicode)
 		username =  body['username']
 		password =  body['password']
-		print(username)
-		print(password)
-		print(request.user.username)
 		user = authenticate(request, username=username, password=password)
 		if user is not None:
 			login(request, user)
-			return HttpResponse(status=302)
+			print(request.user.username)
+			return HttpResponse(status=200)
 		else:
 			return HttpResponse(status=404)
 	else:
