@@ -97,7 +97,7 @@ class Chat extends React.Component {
 			  <div className="row" style={{paddingTop:'0',paddingBottom:'0'}}>
 			    <div id='side-bar-left' className="three wide column" style={{paddingLeft:'0',paddingRight:'0'}}>
 			    <div id='side-left' className='ui segment' style={{height:'100vh',borderRadius:'0',background:'transparent',paddingTop:'5px',paddingBottom:'5px'}}>
-			     <div className="card center" style={{textAlign:'center'}}>
+			     <div className="card center" style={{textAlign:'center',marginBottom:'1rem'}}>
 				    <div className="ui centered small circular image">
 				      <img src="https://semantic-ui.com/images/avatar2/large/kristy.png"/>
 				    </div>
@@ -134,7 +134,7 @@ class Chat extends React.Component {
 			      <ChatScreen feed={this.state.person} clickHandler={this.handleClick}/>
 			    </div>
 			    <div id='side-right' className="three wide column"  style={{paddingLeft:'0',paddingRight:'0'}}>
-			      <div  className='ui segment' style={{height:'100vh',borderRadius:'0'}}>				     
+			      <div  className='ui segment' style={{height:'100vh',borderRadius:'0',background:'transparent'}}>				     
 			      </div>
 			    </div>
 			  </div>
