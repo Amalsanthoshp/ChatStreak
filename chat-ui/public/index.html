@@ -7,8 +7,12 @@
   <script src="https://code.jquery.com/jquery-3.1.1.min.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
   <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
-    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Libre+Baskerville&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Libre+Baskerville&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/flexBackground.css">
+  <script type="text/javascript" src="js/jquery.min.js"></script> 
+  <script type="text/javascript" src="js/flexBackground3.js"></script>
+
   </head>
   <style>
 html,body{
@@ -19,9 +23,21 @@ html,body{
     overflow-x: hidden; 
 }
   </style>
-  <body style="   background: linear-gradient(to right, #43cea2, #185a9d); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-" >
+ <!--  <script type= "text/javascript">
+  $(document).ready(function(){
+    $(".flexBackground").flexBackground({numberOfPoints:'400',
+                                            radius:'2',
+                                            interval : '30',
+                                            velocity : '2',
+                                            color : 'rgb(34, 145, 189)' //Only In RGB format. don't use #hex or any other color format
+                                            });
+  })
+  </script> -->
+  <body style="background: linear-gradient(to right, #43cea2, #185a9d); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */" >
+   <!--  <div class='flexBackground'>
+      <canvas class = "canvasBackground">
+    </canvas>
+    </div> -->
     <div id='root'></div>
-   
   </body>
 </html>
