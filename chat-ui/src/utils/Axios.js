@@ -196,7 +196,16 @@ export function getRecent(url){
 
 
 export function logOut(url){
-		 axios.get('http://localhost:8000/api-auth/logout/')
+		 axios.get('http://localhost:8000/api/logout/').then(function (res){
+		 	if(res.status==='200'){
+		 		console.log(res)
+		 	}
+		 })
+		 .catch(function (err){
+		 	if(err.response){
+		 		console.log(err)
+		 	}
+		 })
 		 localStorage.setItem('token', null);
 		 cogoToast.success('Logged Out Successfully 👋',{color:'green',hideAfter:2});
 		 history.replace('/login');   

@@ -20,7 +20,7 @@ class Chat extends React.Component {
 	  }
 	  this.handleClick =this.handleClick.bind(this);
 	  this.getMessage = this.getMessage.bind(this);
-	  this.test= this.test.bind(this);
+	  this.logout= this.logout.bind(this);
 	  this.handleTime=this.handleTime.bind(this);
 
  }
@@ -82,7 +82,7 @@ class Chat extends React.Component {
 	    }
 		
 	 }
-	 test() {
+	 logout() {
 		Axios.logOut();
 		
 	 }
@@ -104,7 +104,7 @@ class Chat extends React.Component {
 				    <div className="content">
 				      <div className="header"><h2>{this.state.person.username}</h2></div>
 				      <div className="meta">
-				        <a>Coworker &nbsp;</a><i className="edit icon" style={{fontSize:'1rem',color:'black'}} onClick={this.test} ></i>
+				        <a>Coworker &nbsp;</a><i className="edit icon" style={{fontSize:'1rem',color:'black'}} onClick={this.logout} ></i>
 				      </div>
 				      <div className="description">
 				        Elyse is a copywriter working in New York.
