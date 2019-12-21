@@ -21,6 +21,8 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from .serializers import UserSerializer, UserSerializerWithToken
+from django.contrib.auth import authenticate, login
+
 
 
 
@@ -133,3 +135,23 @@ class ChatMessageView(generics.ListCreateAPIView):
 		queryset = self.get_queryset()
 		serializer = MessageSerializer(queryset, many=True)
 		return Response(serializer.data)
+
+
+# @csrf_exempt 
+def userLogin(request):
+	if request.method == 'POST':
+		body_unicode = request.body.decode('utf-8')
+		body = json.loads(body_unicode)
+		username =  body['username']
+		password =  body['password']
+		print(username)
+		print(password)
+		print(request.user.username)
+		user = authenticate(request, username=username, password=password)
+		if user is not None:
+			login(request, user)
+			return HttpResponse(status=302)
+		else:
+			return HttpResponse(status=404)
+	else:
+		return HttpResponse(status=400)
