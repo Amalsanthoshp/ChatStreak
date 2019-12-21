@@ -5,7 +5,7 @@ import Cookies from 'js-cookie';
 
 
 
-export function postLogin(username,password,url2){
+export function postLogin(username,password,url1,url2){
 	axios.defaults.xsrfCookieName = 'csrftoken'
 	axios.defaults.xsrfHeaderName = "X-CSRFTOKEN"
 	axios.defaults.withCredentials = true
@@ -24,30 +24,10 @@ export function postLogin(username,password,url2){
 		    }
 		    return cookieValue;
 		}
-		// var csrftoken = getCookie('csrftoken');
-		// console.log(csrftoken)
-		console.log('username: ', username ,'password: ',password ,csrftoken, 'URL ' ,url2)
-		// axios.post(url2, 
-
-	 //  	  		{
-		//             'username':username,
-		//             'username':username,
-		//         },
-		//         {
-		//             headers: {
-		//                 "Content-Type": 'application/json',
-		//                 'X-CSRFTOKEN': csrftoken,
-
-					
-
-		//             },
-		//             // headers: new Headers({"Content-Type": "application/json", 'X-CSRFToken': cookies.csrftoken})
-		//         }
-		    // )
-		 
+		
 		    var csrftoken = Cookies.get('csrftoken'); // Using JS Cookies library
 		    var headers = {'X-CSRFTOKEN': csrftoken};
-		    axios.post(url2,
+		    axios.post(url1,
 		    	  {
 		    	  	'username':username,
 		    	  	'password':password,
@@ -57,7 +37,7 @@ export function postLogin(username,password,url2){
 		    	,{headers: headers})
 		    .then(function (res){
 		    	if (res.status=='200'){
-		    	alert("Logged In");
+		    	return true
 		     	
 
 		     }})
@@ -65,46 +45,46 @@ export function postLogin(username,password,url2){
 		    	console.log(error);
 		    	
 		 })
-	  	 //  axios.post(url1, 
+	  	 axios.post(url2, 
 
-	  	 //  		{
-		   //          'username':username,
-		   //          'password':password,
-		   //      },
-		   //      {
-		   //          headers: {
-		   //              "Content-Type": 'application/json',
-		   //              'X-CSRFTOKEN': csrftoken,
+	  	  		{
+		            'username':username,
+		            'password':password,
+		        },
+		        {
+		            headers: {
+		                "Content-Type": 'application/json',
+		                'X-CSRFTOKEN': csrftoken,
 
 					
 
-		   //          },
-		   //      }
-		   //  )
-		   //  .then(function (res){
-		   //  	if (res.status=='200'){
-		   //  	console.log(res);
-		   //   	localStorage.setItem('token', res.data.token); 
-		   //   	cogoToast.success('Logged In Successfully 🤗',{color:'green',hideAfter:2});
-		   //   	history.replace('/home')
-		   //   	console.log(localStorage.getItem('token')); 
+		            },
+		        }
+		    )
+		    .then(function (res){
+		    	if (res.status=='200'){
+		    	console.log(res);
+		     	localStorage.setItem('token', res.data.token); 
+		     	cogoToast.success('Logged In Successfully 🤗',{color:'green',hideAfter:2});
+		     	history.replace('/home')
+		     	console.log(localStorage.getItem('token')); 
 
-		   //   }})
-		   //  .catch(function (error) {
-			  //   if (error.response) {
-			  //     if(error.response.status =='401' || error.response.status == '400'){
+		     }})
+		    .catch(function (error) {
+			    if (error.response) {
+			      if(error.response.status =='401' || error.response.status == '400'){
 			      	
-					// function err(id){
-					// 	var d = document.getElementById(id);
-					// 	d.className += " error";
+					function err(id){
+						var d = document.getElementById(id);
+						d.className += " error";
 
-					// }
-					// err('username-field')
-					// err('password-field')
-					// cogoToast.error('Username or Password is Incorrect !',{color:'green',hideAfter:2});
-			  //     }
-			  //   }
-			  // })
+					}
+					err('username-field')
+					err('password-field')
+					cogoToast.error('Username or Password is Incorrect !',{color:'green',hideAfter:2});
+			      }
+			    }
+			  })
 		    
 		    
 
