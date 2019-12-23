@@ -223,7 +223,6 @@ export function getFeed(url){
 		        var cookies = document.cookie.split(';');
 		        for (var i = 0; i < cookies.length; i++) {
 		            var cookie = cookies[i].trim();
-		            // Does this cookie string begin with the name we want?
 		            if (cookie.substring(0, name.length + 1) === (name + '=')) {
 		                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
 		                break;
@@ -243,8 +242,6 @@ export function getFeed(url){
 	  	return axios.get(url,config)
 		    .then(function (res){
 		    	if (res.status=='200'){
-		    	console.log(res);
-		     	console.log('user selected')
 		     	return res
 
 		     }})
