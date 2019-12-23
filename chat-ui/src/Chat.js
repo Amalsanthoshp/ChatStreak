@@ -15,14 +15,18 @@ class Chat extends React.Component {
 	 	super()
 	 
 	 this.state = {
+
+	 	feeds : [],
     	person: [],
     	recent:[],
+    	
 	  }
+
 	  this.handleClick =this.handleClick.bind(this);
 	  this.getMessage = this.getMessage.bind(this);
 	  this.logout= this.logout.bind(this);
 	  this.handleTime=this.handleTime.bind(this);
-
+	  this.handleChat= this.handleChat.bind(this);
  }
 
  	getMessage(){
@@ -50,13 +54,6 @@ class Chat extends React.Component {
 	  var self = this;
 	  Axios.homeTokenVerify(`http://localhost:8000/api/token-verify/`)
 	 .then(function(response) {
-		  console.log(response);
-		  Axios.getRecent('http://localhost:8000/api/recent/' + response)
-		  .then(res => {
-	      	console.log(res.data.recentMessages_ReceivedAndSend)
-	        const recent = res.data.recentMessages_ReceivedAndSend;
-	        this.setState({ recent });
-	  	    })
 		  Axios.getUser(`http://localhost:8000/api/chat/`+ response)
 	      .then(res => {
 	      	console.log(res)
@@ -86,11 +83,27 @@ class Chat extends React.Component {
 		Axios.logOut();
 		
 	 }
+
+	 handleChat(value) {
+	 	console.log(value)
+	 	var self = this;
+	 	const url = 'http://localhost:8000/api/messages/' + value
+	 	Axios.getFeed(url)
+	 	.then(function(res){
+	 	  const feeds =res.data
+	 	  console.log(feeds)
+	      self.setState({feeds})
+	 	})
+	 	.catch((error) => {
+	 		console.log(error)
+	 	})
+	 }
 	 
 	
 
 
 	render(){
+
 		return ( 
 			<>
 			<div className="ui internally grid">
@@ -121,23 +134,21 @@ class Chat extends React.Component {
 				    </div>
 				 </div>
 				<div style={{background:'white'}}>
-				 <div className="ui one item item menu">
-				  <div className="active item"><i className="users icon" style={{fontSize:'1.5rem',color:'black'}}></i> &nbsp; Chats </div>
-				</div>
-
-				<Recent chat={this.state.recent} />
-
-				</div>
-			    </div>
-			   </div>
-			    <div id='main-chat' className="ten wide column" style={{paddingLeft:'0',paddingRight:'0'}}>
-			      <ChatScreen feed={this.state.person} clickHandler={this.handleClick}/>
-			    </div>
-			    <div id='side-right' className="three wide column"  style={{paddingLeft:'0',paddingRight:'0'}}>
-			      <div  className='ui segment' style={{height:'100vh',borderRadius:'0',background:'transparent'}}>				     
+				  <div className="ui one item item menu">
+				   <div className="active item"><i className="users icon" style={{fontSize:'1.5rem',color:'black'}}></i> &nbsp; Chats </div>
+				  </div>
+				     <Recent chat={this.state.person.recentMessages_ReceivedAndSend} feedHandler={this.handleChat} />
+				  </div>
 			      </div>
-			    </div>
-			  </div>
+			     </div>
+			     <div id='main-chat' className="ten wide column" style={{paddingLeft:'0',paddingRight:'0'}}>
+			       <ChatScreen feed={this.state.feeds} clickHandler={this.handleClick}/>
+			     </div>
+			      <div id='side-right' className="three wide column"  style={{paddingLeft:'0',paddingRight:'0'}}>
+			         <div  className='ui segment' style={{height:'100vh',borderRadius:'0',background:'transparent'}}>				     
+			       </div>
+			     </div>
+			   </div>
 			 </div>
 			</>
 
