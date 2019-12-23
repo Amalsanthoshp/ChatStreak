@@ -12,17 +12,18 @@ class ChatScreen extends React.Component {
 
 
 	render(){
-		 if(this.props.feed.message_send){
-		 	console.log('hai')
-		 	let numberOfMessage =this.props.feed.message_send.length;
+		 if(this.props.feed){
+		 	console.log('Feed', this.props.feed)
+		 	let numberOfMessage =this.props.feed.length;
+		 	console.log(numberOfMessage)
 		 	var rows = [];
 			for (var i = 0; i < numberOfMessage ; i++) {
 				    rows.push(<div key={i} className="item">
 				    	<Feed 
-				    	id={this.props.feed.message_send[i].id}
+				    	id={this.props.feed[i].id}
 				    	image="https://cbsnews1.cbsistatic.com/hub/i/2016/03/23/38e32f54-b910-4612-8852-be9e0fbdbf73/cat-istock.jpg"
-				    	message={this.props.feed.message_send[i].message}
-				    	time={this.props.feed.message_send[i].sent_time}
+				    	message={this.props.feed[i].message}
+				    	time={this.props.feed.sent_time}
 				 		name='amal'
 				    	/>
 				    	</div>);
