@@ -1,10 +1,13 @@
-# todos/serializers.py
 from rest_framework import serializers
 from .models import *
 from django.db.models import Q
 from rest_framework import serializers
 from rest_framework_jwt.settings import api_settings
 from api.models import Person
+from django.http import JsonResponse
+from django.forms.models import model_to_dict
+import json
+
 
 
 
@@ -33,7 +36,29 @@ class RecentChatSerializer(serializers.ModelSerializer):
 		model = Person
 
 	def get_recentMessageRandS(self,obj):
-		return Chat.objects.filter(Q(user_recevied=obj.id) |Q(user_sent=obj.id)).order_by('-sent_time').values()
+		query = Chat.objects.filter(Q(user_recevied=obj.id) | Q(user_sent=obj.id)).order_by('-sent_time')
+		queryset = []
+		messageRandSlist = list()
+		messageRandSset = set()
+		id_list = []
+		for q1 in query:
+			messageRandSlist.append((q1.user_sent_id,q1.user_recevied_id ))
+			messageRandSset = set(messageRandSlist)
+		
+		for q2 in query:
+			if tuple((q2.user_sent_id ,q2.user_recevied_id)) in messageRandSset:
+				queryset.append(q2)
+				try:
+					messageRandSset.remove(tuple((q2.user_sent_id,q2.user_recevied_id)))
+					messageRandSset.remove(tuple((q2.user_recevied_id,q2.user_sent_id)))
+				except KeyError:
+					continue
+
+
+		for ids in queryset:
+			id_list.append(ids.id)
+
+		return Chat.objects.filter(pk__in=id_list).order_by('-sent_time').values()
 
 
 
@@ -56,7 +81,29 @@ class PersonSerializer(serializers.ModelSerializer):
 		return Chat.objects.filter(user_recevied=obj.id,delivered_time__isnull=True).count()
 
 	def get_recentMessageRandS(self,obj):
-		return Chat.objects.filter(Q(user_recevied=obj.id) |Q(user_sent=obj.id)).order_by('-sent_time').values()
+		query = Chat.objects.filter(Q(user_recevied=obj.id) | Q(user_sent=obj.id)).order_by('-sent_time')
+		queryset = []
+		messageRandSlist = list()
+		messageRandSset = set()
+		id_list = []
+		for q1 in query:
+			messageRandSlist.append((q1.user_sent_id,q1.user_recevied_id ))
+			messageRandSset = set(messageRandSlist)
+			
+		for q2 in query:
+			if tuple((q2.user_sent_id ,q2.user_recevied_id)) in messageRandSset:
+				queryset.append(q2)
+				try:
+					messageRandSset.remove(tuple((q2.user_sent_id,q2.user_recevied_id)))
+					messageRandSset.remove(tuple((q2.user_recevied_id,q2.user_sent_id)))
+				except KeyError:
+					continue
+
+
+		for ids in queryset:
+			id_list.append(ids.id)
+
+		return Chat.objects.filter(pk__in=id_list).order_by('-sent_time').values()
 
 
 
