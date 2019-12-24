@@ -89,9 +89,10 @@ class PersonSerializer(serializers.ModelSerializer):
 	message_send = serializers.SerializerMethodField('get_messageSent')
 	message_recieved = serializers.SerializerMethodField('get_messageRecieved')
 	message_recieved_count = serializers.SerializerMethodField('get_messageRecievedCount')
-	
+
 	class Meta:
-		fields = ('id','email','username','recentMessages_ReceivedAndSend','message_recieved_count','message_send','message_recieved')
+		fields = ('id','email','username','recentMessages_ReceivedAndSend',
+			        'message_recieved_count','message_send','message_recieved')
 		model = Person
 
 	def get_messageSent(self, obj):
@@ -125,7 +126,8 @@ class PersonSerializer(serializers.ModelSerializer):
 		for ids in queryset:
 			id_list.append(ids.id)
 
-		return Chat.objects.filter(pk__in=id_list).order_by('-sent_time').values()
+		queryRandS = Chat.objects.filter(pk__in=id_list).order_by('-sent_time')
+		return queryRandS.values()
 
 
 
