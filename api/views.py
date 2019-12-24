@@ -132,7 +132,7 @@ class ChatMessageView(generics.ListCreateAPIView):
 		return Chat.objects.filter(Q(user_sent_id=self.kwargs['pk']) & Q(user_recevied_id=self.request.user.id) | Q(user_sent_id=self.request.user.id) & Q(user_recevied_id=self.kwargs['pk']))
 	def list(self,request,pk,*args,**kwargs):
 		queryset = self.get_queryset()
-		serializer = MessageSerializer(queryset, many=True)
+		serializer = MessageSerializer(queryset, many=True,context=request.user)
 		return Response(serializer.data)
 
  
