@@ -6,17 +6,36 @@ class Recent extends React.Component {
 
 
 	render(){
-		if(this.props.chat){
-			let numberOfMessage =this.props.chat.length;
+		if(this.props.chat.recentMessages_ReceivedAndSend){
+			let numberOfMessage =this.props.chat.recentMessages_ReceivedAndSend.length;
 		 	var rows = [];
+		 	console.log(this.props.chat)
+
 		 	for (var i = 0; i < numberOfMessage ; i++) {
+
+		 			var idForFeed = ''
+		 			var username = ''
+
+		 			console.log('Recieved Id ' , this.props.chat.recentMessages_ReceivedAndSend[i].user_recevied_id)
+		 			console.log('User Id ',  this.props.chat.id)
+		 			console.log( 'Sent Id' , this.props.chat.recentMessages_ReceivedAndSend[i].user_sent_id)
+
+		 			if (this.props.chat.recentMessages_ReceivedAndSend[i].user_recevied_id === this.props.chat.id) {
+
+		 				idForFeed = this.props.chat.recentMessages_ReceivedAndSend[i].user_sent_id
+		 			}
+		 			else {
+
+		 				idForFeed = this.props.chat.recentMessages_ReceivedAndSend[i].user_recevied_id
+		 			}
+
 				    rows.push(<span key={i} className='item'>
 				    	<IndividualChat
 				    	 feed ={this.props.feedHandler}
-				    	 id = {this.props.chat[i].user_recevied_id }
-				    	 name= {this.props.chat[i].user_recevied_id}
-				    	 message={this.props.chat[i].message}
-				    	 time={this.props.chat[i].time}
+				    	 id = {idForFeed}
+				    	 name= {this.props.chat.recentMessages_ReceivedAndSend[i].user_recevied_id}
+				    	 message={this.props.chat.recentMessages_ReceivedAndSend[i].message}
+				    	 time={this.props.chat.recentMessages_ReceivedAndSend[i].time}
 				    	 /></span>);
 				    }
 		 }
