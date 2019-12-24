@@ -46,11 +46,12 @@ class Chat extends React.Component {
 	        this.setState({ recent });
 	  	})
 		this.getMessage()
+		
     }
 	componentDidMount() {
-	  // this.timerID = setInterval(
-   //    () => this.handleTime(),
-   //    1000);
+	  this.timerID = setInterval(
+      () => this.handleTime(),
+      1000);
 	  var self = this;
 	  Axios.homeTokenVerify(`http://localhost:8000/api/token-verify/`)
 	 .then(function(response) {
@@ -66,14 +67,13 @@ class Chat extends React.Component {
 		        console.log(error);
 		    })
 	    }
-	   // componentWillUnmount() {
-    // 		clearInterval(this.timerID);
-  		// }
+	   componentWillUnmount() {
+    		clearInterval(this.timerID);
+  		}
 	  handleClick(value){
-	  	console.log('value : ' ,value)
 	    let message = document.getElementById('message').value
 	    if (message){
-		  	Axios.postMessage(message,this.state.person.id,2,'http://localhost:8000/api/message_send/')
+		  	Axios.postMessage(message,this.state.person.id,value,'http://localhost:8000/api/message_send/')
 		  	this.getMessage();
 		  	document.getElementById('message').value = '';
 		    console.log(this.state.person)
