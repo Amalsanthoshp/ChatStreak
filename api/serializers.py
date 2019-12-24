@@ -12,17 +12,39 @@ import json
 
 
 
+class UserSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Person
+        fields = ('id','username','password')
+
+
+
+
+
+
 class MessageSerializer(serializers.ModelSerializer):
-	# Sentmessages = serializers.SerializerMethodField('get_SentMessage')
-	# Receivedmessage =serializers.SerializerMethodField('get_ReceivedMessage')
+	user_id = serializers.SerializerMethodField('get_userId')
+	user_sent_username = serializers.CharField(source='user_sent.username')
+	user_recevied_username =serializers.CharField(source='user_recevied.username')
+	username = serializers.SerializerMethodField('get_userName')	
+
 	class Meta:
-		fields = '__all__'
+		fields = (  'user_id','username','id','user_sent_id','user_recevied_id',
+			          'user_sent_username','user_recevied_username',
+			             'message','sent_time','delivered_time'
+			       )
 		model = Chat
 
-	# def get_SentMessage(self,obj):
-	# 	return Chat.objects.filter(user_sent_id=obj.id).values()
-	# def get_ReceivedMessage(self,obj):
-	# 	return Chat.objects.filter(user_recevied_id=obj.id).values()
+
+	def get_userId(self,obj):
+		user=Person.objects.get(id=self.context.id)
+		return user.id
+
+	def get_userName(self,obj):
+		user=Person.objects.get(id=self.context.id)
+		return user.username
+
 
 
 
@@ -69,7 +91,7 @@ class PersonSerializer(serializers.ModelSerializer):
 	message_recieved_count = serializers.SerializerMethodField('get_messageRecievedCount')
 	
 	class Meta:
-		fields = '__all__'
+		fields = ('id','email','username','recentMessages_ReceivedAndSend','message_recieved_count','message_send','message_recieved')
 		model = Person
 
 	def get_messageSent(self, obj):
