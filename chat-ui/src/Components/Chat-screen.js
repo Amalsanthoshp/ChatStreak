@@ -10,8 +10,12 @@ class ChatScreen extends React.Component {
 
 	this.messageSend = this.messageSend.bind(this);
 	}
-	messageSend() {
-		this.props.clickHandler(this.idOfUser)
+	messageSend(event) {
+		var id = event.target.id
+		this.props.clickHandler(id.split('_')[0])
+		
+
+	
 	}
 
 
@@ -38,7 +42,7 @@ class ChatScreen extends React.Component {
 				    	id={this.props.feed[i].id}
 				    	image="https://cbsnews1.cbsistatic.com/hub/i/2016/03/23/38e32f54-b910-4612-8852-be9e0fbdbf73/cat-istock.jpg"
 				    	message={this.props.feed[i].message}
-				    	time={this.props.feed.sent_time}
+				    	time={this.props.feed[i].sent_time}
 				 		name= {username}
 				    	/>
 				    	</div>);
@@ -68,7 +72,7 @@ class ChatScreen extends React.Component {
 				   <div className="ui fluid action input">
 				   	  <button className="ui button"><i className="upload icon"></i></button>
 					 <input type="text" placeholder="Search..." id="message"/>
-					  <div className=" small ui button" onClick={this.messageSend}><i className="paper plane outline icon" style={{fontSize:'1.5rem'}}></i></div>
+					  <div className=" small ui button"><i className="paper plane outline icon" id ={idOfUser + '_send'} onClick={this.messageSend} style={{fontSize:'1.5rem'}}></i></div>
 				   </div>
 				 </div>
 
