@@ -69,7 +69,8 @@ class Chat extends React.Component {
 	   // componentWillUnmount() {
     // 		clearInterval(this.timerID);
   		// }
-	  handleClick(){
+	  handleClick(value){
+	  	console.log('value : ' ,value)
 	    let message = document.getElementById('message').value
 	    if (message){
 		  	Axios.postMessage(message,this.state.person.id,2,'http://localhost:8000/api/message_send/')
@@ -137,7 +138,7 @@ class Chat extends React.Component {
 				  <div className="ui one item item menu">
 				   <div className="active item"><i className="users icon" style={{fontSize:'1.5rem',color:'black'}}></i> &nbsp; Chats </div>
 				  </div>
-				     <Recent chat={this.state.person.recentMessages_ReceivedAndSend} feedHandler={this.handleChat} />
+				     <Recent chat={this.state.person} feedHandler={this.handleChat} />
 				  </div>
 			      </div>
 			     </div>
