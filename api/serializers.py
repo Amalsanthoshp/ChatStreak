@@ -94,6 +94,9 @@ class PersonSerializer(serializers.ModelSerializer):
 		fields = ('id','email','username','recentMessages_ReceivedAndSend',
 			        'message_recieved_count','message_send','message_recieved')
 		model = Person
+		related_object = 'Chat'
+
+
 
 	def get_messageSent(self, obj):
 		return Chat.objects.filter(user_sent=obj.id).values()
@@ -109,6 +112,8 @@ class PersonSerializer(serializers.ModelSerializer):
 		messageRandSlist = list()
 		messageRandSset = set()
 		id_list = []
+		sent_username_list = []
+		receive_username_list = []
 		for q1 in query:
 			messageRandSlist.append((q1.user_sent_id,q1.user_recevied_id ))
 			messageRandSset = set(messageRandSlist)
@@ -127,7 +132,10 @@ class PersonSerializer(serializers.ModelSerializer):
 			id_list.append(ids.id)
 
 		queryRandS = Chat.objects.filter(pk__in=id_list).order_by('-sent_time')
-		return queryRandS.values()
+
+		return queryRandS.values( 'id','user_sent_id','user_recevied_id',
+									'user_sent__username','user_recevied__username',
+									'message','sent_time','delivered_time') 
 
 
 
