@@ -11,6 +11,17 @@ class IndividualChat extends React.Component {
 
 	this.handleFeed = this.handleFeed.bind(this);
 	}
+
+	componentDidMount() {
+	  var id = document.getElementById('recent_list').getElementsByTagName('div')[0].id;
+	  this.props.feed(id)
+
+	}
+	componentDidUpdate(prevProps, prevState) {
+	  if (prevProps.id !== this.props.id) {
+	  	
+	  }
+	}
 	
 	handleFeed(){
 		this.props.feed(this.props.id)
@@ -24,7 +35,7 @@ class IndividualChat extends React.Component {
 			   	    <div id={this.props.id} className="ui green card" style={{borderRadius:'0!important'}} onClick={this.handleFeed}>
 				 	   <div className="right floated author">
 					 	 <div>
-					       <img className="ui avatar image" src="https://semantic-ui.com/images/avatar/small/jenny.jpg"/> {this.props.name}<br></br>
+					       <img className="ui avatar image" src={this.props.image}/> {this.props.name}<br></br>
 					       <span className=''> {this.props.message}</span>
 
 					      </div>

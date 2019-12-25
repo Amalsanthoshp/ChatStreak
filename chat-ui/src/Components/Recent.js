@@ -23,17 +23,20 @@ class Recent extends React.Component {
 		 			if (this.props.chat.recentMessages_ReceivedAndSend[i].user_recevied_id === this.props.chat.id) {
 
 		 				idForFeed = this.props.chat.recentMessages_ReceivedAndSend[i].user_sent_id
+		 				username = this.props.chat.recentMessages_ReceivedAndSend[i].user_sent__username
 		 			}
 		 			else {
 
 		 				idForFeed = this.props.chat.recentMessages_ReceivedAndSend[i].user_recevied_id
+		 				username = this.props.chat.recentMessages_ReceivedAndSend[i].user_recevied__username
 		 			}
 
 				    rows.push(<span key={i} className='item'>
 				    	<IndividualChat
 				    	 feed ={this.props.feedHandler}
 				    	 id = {idForFeed}
-				    	 name= {this.props.chat.recentMessages_ReceivedAndSend[i].user_recevied_id}
+				    	 name= {username}
+				    	 image = {'https://ui-avatars.com/api/?background=0D8ABC&color=fff&name='+username}
 				    	 message={this.props.chat.recentMessages_ReceivedAndSend[i].message}
 				    	 time={this.props.chat.recentMessages_ReceivedAndSend[i].time}
 				    	 /></span>);
@@ -45,7 +48,7 @@ class Recent extends React.Component {
 		 let row = rows ? rows :<p> Loading...</p>
 
 		return (
-				 <div className="ui list fluid" style={{overflow:'scroll',height:'36vh'}}>
+				 <div id='recent_list' className="ui list fluid" style={{overflow:'scroll',height:'36vh'}}>
 				    {rows}
 				  </div>
 
