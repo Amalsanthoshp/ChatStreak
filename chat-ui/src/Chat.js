@@ -19,6 +19,7 @@ class Chat extends React.Component {
 	 	feeds : [],
     	person: [],
     	recent:[],
+    	indValue:'',
     	
 	  }
 
@@ -44,8 +45,13 @@ class Chat extends React.Component {
 		  .then(res => {
 	        const recent = res.data.recentMessages_ReceivedAndSend;
 	        this.setState({ recent });
-	  	})
+
+	  		})
+		  .catch((error) => {
+		  	console.log(error)
+		  })
 		this.getMessage()
+		this.handleChat(this.state.indValue)
 		
     }
 	componentDidMount() {
@@ -54,7 +60,7 @@ class Chat extends React.Component {
       1000);
 	  var self = this;
 	  Axios.homeTokenVerify(`http://localhost:8000/api/token-verify/`)
-	 .then(function(response) {
+	    .then(function(response) {
 		  Axios.getUser(`http://localhost:8000/api/chat/`+ response)
 	      .then(res => {
 	      	console.log(res)
@@ -63,14 +69,20 @@ class Chat extends React.Component {
 	        this.setState({ person });
 	  	    })
 			}.bind(this))
-			.catch((error) => {
-		        console.log(error);
-		    })
+		   .catch((error) => {
+		       console.log(error);
+		   })
+		.catch((error) =>{
+			 console.log(error)
+		  })
 	    }
-	   componentWillUnmount() {
+
+	componentWillUnmount() {
     		clearInterval(this.timerID);
-  		}
-	  handleClick(value){
+  	  }
+
+
+	handleClick(value){
 	    let message = document.getElementById('message').value
 	    if (message){
 		  	Axios.postMessage(message,this.state.person.id,value,'http://localhost:8000/api/message_send/')
@@ -86,7 +98,7 @@ class Chat extends React.Component {
 	 }
 
 	 handleChat(value) {
-	 	console.log(value)
+	 	this.setState({ indValue:value })
 	 	var self = this;
 	 	const url = 'http://localhost:8000/api/messages/' + value
 	 	Axios.getFeed(url)
