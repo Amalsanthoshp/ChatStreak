@@ -37,17 +37,19 @@ class ChatScreen extends React.Component {
 						username = this.props.feed[i].user_recevied_username
 						idOfUser = this.props.feed[i].user_recevied_id
 					}
-				    rows.push(<div key={i} className="item">
+				    rows.push(
+				    	<div key={i} className="item">
 				    	<Feed 
-				    	id={this.props.feed[i].id}
-				    	image="https://cbsnews1.cbsistatic.com/hub/i/2016/03/23/38e32f54-b910-4612-8852-be9e0fbdbf73/cat-istock.jpg"
-				    	message={this.props.feed[i].message}
-				    	time={this.props.feed[i].sent_time}
-				 		name= {username}
-				    	/>
+				    	 id={this.props.feed[i].id}
+				    	 image={'https://ui-avatars.com/api/?background=0D8ABC&color=fff&name='+username}
+				    	 message={this.props.feed[i].message}
+				    	 time={this.props.feed[i].sent_time}
+				 		 name= {username}
+				 		/>
 				    	</div>);
-				}
-		 }
+	
+			     	}
+			    }
 		 else{
 		 	let rows = <div> Loading....</div>
 		 }
