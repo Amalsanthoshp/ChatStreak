@@ -34,11 +34,11 @@ class Chat extends React.Component {
 	    Axios.getUser(`http://localhost:8000/api/chat/`+ this.state.person.id)
 	      .then(res => {
 	        const person = res.data;
-	        this.setState({ person });
-	  	    })
-			.catch((error) => {
+	        this.setState({ person })})
+		  .catch((error) => {
 		        console.log(error);
-		    });
+		        return false
+		   });
 	}
 	handleTime() {
 	 	Axios.getRecent('http://localhost:8000/api/recent/' + this.state.person.id)
@@ -50,26 +50,27 @@ class Chat extends React.Component {
 		  .catch((error) => {
 		  	console.log(error)
 		  })
-		this.getMessage()
-		this.handleChat(this.state.indValue)
+		this.getMessage();
+		this.handleChat(this.state.indValue);
 		
     }
 	componentDidMount() {
+	  this.mounted = true;
 	  this.timerID = setInterval(
       () => this.handleTime(),
       1000);
 	  var self = this;
 	  Axios.homeTokenVerify(`http://localhost:8000/api/token-verify/`)
-	    .then(function(response) {
+	    .then(function(response) {if(this.mounted){
 		  Axios.getUser(`http://localhost:8000/api/chat/`+ response)
 	      .then(res => {
 	      	console.log(res)
 	        const person = res.data;
 	        console.log(person)
 	        this.setState({ person });
-	  	    })
-			}.bind(this))
-		   .catch((error) => {
+	  	      })
+			}}.bind(this))
+		  .catch((error) => {
 		       console.log(error);
 		   })
 		.catch((error) =>{
@@ -78,7 +79,8 @@ class Chat extends React.Component {
 	    }
 
 	componentWillUnmount() {
-    		clearInterval(this.timerID);
+		this.mounted = false;
+    	clearInterval(this.timerID);
   	  }
 
 
@@ -117,6 +119,8 @@ class Chat extends React.Component {
 
 	render(){
 
+		let username = this.state.person.username ? this.state.person.username : null;
+
 		return ( 
 			<>
 			<div className="ui internally grid">
@@ -128,7 +132,7 @@ class Chat extends React.Component {
 				      <img src="https://semantic-ui.com/images/avatar2/large/kristy.png"/>
 				    </div>
 				    <div className="content">
-				      <div className="header"><h2>{this.state.person.username}</h2></div>
+				      <div className="header"><h2>{username}</h2></div>
 				      <div className="meta">
 				        <a>Coworker &nbsp;</a><i className="edit icon" style={{fontSize:'1rem',color:'black'}} onClick={this.logout} ></i>
 				      </div>
