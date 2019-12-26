@@ -38,7 +38,7 @@ class ChatScreen extends React.Component {
 						idOfUser = this.props.feed[i].user_recevied_id
 					}
 				    rows.push(
-				    	<div key={i} className="item">
+				    	<div key={i} className="item" style={{borderRadius:'0'}}>
 				    	<Feed 
 				    	 id={this.props.feed[i].id}
 				    	 image={'https://ui-avatars.com/api/?background=0D8ABC&color=fff&name='+username}
@@ -58,12 +58,12 @@ class ChatScreen extends React.Component {
 		return(
 				<div id='main' className="ui segment" style={{height:'100vh',borderRadius:'0',paddingLeft:'.5rem',paddingRight:'.5rem',paddingTop:'0'}}>
 					<div className="ui one item menu" style={{marginBottom:'0'}}>
-					  <div className="item"  style={{justifyContent:'space-between'}}>
+					  <div className="item"  style={{justifyContent:'space-between',paddingLeft:'10px!important'}}>
 					    <div>
 					  	 <img className="ui avatar image" src="https://semantic-ui.com/images/avatar/small/jenny.jpg"/>
 						 <span><b>{username}</b></span>
 						</div>
-						 <div style={{justifyContent:'flex-end'}}><i className="cog icon" style={{fontSize:'1.5rem',color:'green'}}></i></div>
+						 <div style={{justifyContent:'flex-end',paddingLeft:'12px'}}><i className="cog icon" style={{fontSize:'1.5rem',color:'green'}}></i></div>
 					  </div>
 					</div>
 					<div id='main-chatscreen' className="ui segment" style={{height:'85vh',overflow:'scroll',paddingTop:'0',paddingBottom:'0',marginTop:'0',marginBottom:'0'}}>
