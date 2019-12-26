@@ -84,8 +84,8 @@ export function getUser(url){
 		     }})
 		    .catch(function (error) {
 			    if (error.response) {
-			      if(error.response.status =='400' || error.response.status =='401'){
-			      	return false
+			      if(error.response.status >='400' ){
+			      	return error
 			      }
 			    }
 			  })
@@ -139,7 +139,7 @@ export function homeTokenVerify(url){
 		     }})
 		    .catch(function (error) {
 			    if (error.response) {
-			      if(error.response.status =='400' || error.response.status =='401'){
+			      if(error.response.status >= '400'){
 			      	history.replace('/login')
 			      	// return false
 			      }
