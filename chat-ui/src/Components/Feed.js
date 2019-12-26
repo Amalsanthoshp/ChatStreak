@@ -49,8 +49,8 @@ class Feed extends React.Component {
 
 
 			<>	  
-				<div id={this.props.id +'_feed'} className="ui fluid grey card" style={{marginTop:'.5rem'}}>
-					<div className="right floated author" style={{paddingTop:'.5rem'}}>
+				<div id={this.props.id +'_feed'} className="ui fluid link grey card" style={{marginTop:'.2rem',borderRadius:'0!important'}}>
+					<div className="right floated author" style={{paddingTop:'.2rem'}}>
 					      <img className="ui avatar image" src={this.props.image}/> <b>{this.props.name}</b>
 					    </div>
 					  <div className="content">
