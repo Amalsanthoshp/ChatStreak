@@ -13,6 +13,7 @@ class IndividualChat extends React.Component {
 	}
 
 	componentDidMount() {
+	  this.mounted = true;
 	  var id = document.getElementById('recent_list').getElementsByTagName('div')[0].id;
 	  this.props.feed(id)
 
@@ -21,6 +22,9 @@ class IndividualChat extends React.Component {
 	  if (prevProps.id !== this.props.id) {
 	  	
 	  }
+	}
+	componentWillUnmount(){
+  		this.mounted = false;
 	}
 	
 	handleFeed(){
