@@ -8,7 +8,7 @@ class ChatScreen extends React.Component {
 	constructor(){
 		super()
 
-	this.messageSend = this.messageSend.bind(this);
+	 this.messageSend = this.messageSend.bind(this);
 	}
 	messageSend(event) {
 		var id = event.target.id
