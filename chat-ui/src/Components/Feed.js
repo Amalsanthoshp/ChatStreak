@@ -66,24 +66,7 @@ class Feed extends React.Component {
 						</div>
 						</span>
 					  </div>
-					</div>
-					<div className="ui small test modal transition">
-				    <div className="header">
-				      Delete Your Account
-				    </div>
-				    <div className="content">
-				      <p>Are you sure you want to delete your account</p>
-				    </div>
-				    <div className="actions">
-				      <div className="ui negative button">
-				        No
-				      </div>
-				      <div className="ui positive right labeled icon button">
-				        Yes
-				        <i className="checkmark icon"></i>
-				      </div>
-				    </div>
-				  </div>		 
+					</div>		 
             </>
 
 
