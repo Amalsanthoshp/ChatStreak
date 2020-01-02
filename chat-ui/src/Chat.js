@@ -61,15 +61,15 @@ class Chat extends React.Component {
       1000);
 	  var self = this;
 	  Axios.homeTokenVerify(`http://localhost:8000/api/token-verify/`)
-	    .then(function(response) {if(this.mounted){
+	    .then(function(response) {
 		  Axios.getUser(`http://localhost:8000/api/chat/`+ response)
-	      .then(res => {
+	      .then(res => { 
 	      	console.log(res)
 	        const person = res.data;
 	        console.log(person)
 	        this.setState({ person });
 	  	      })
-			}}.bind(this))
+			}.bind(this))
 		  .catch((error) => {
 		       console.log(error);
 		   })
