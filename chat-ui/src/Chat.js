@@ -2,6 +2,7 @@ import React from 'react';
 import './style.css';
 import ChatScreen from './Components/Chat-screen'
 import IndividualChat from './Components/Indivdual-chat';
+import Search from './Components/Search';
 import Recent from './Components/Recent';
 import axios from 'axios';
 import Cookies from 'js-cookie';
@@ -28,6 +29,7 @@ class Chat extends React.Component {
 	  this.logout= this.logout.bind(this);
 	  this.handleTime=this.handleTime.bind(this);
 	  this.handleChat= this.handleChat.bind(this);
+	  this.handleSearch=this.handleSearch.bind(this);
  }
 
  	getMessage(){
@@ -55,10 +57,10 @@ class Chat extends React.Component {
 		
     }
 	componentDidMount() {
-	  this.mounted = true;
-	  this.timerID = setInterval(
-      () => this.handleTime(),
-      1000);
+	  // this.mounted = true;
+	  // this.timerID = setInterval(
+   //    () => this.handleTime(),
+   //    1000);
 	  var self = this;
 	  Axios.homeTokenVerify(`http://localhost:8000/api/token-verify/`)
 	    .then(function(response) {
@@ -78,10 +80,10 @@ class Chat extends React.Component {
 		  })
 	    }
 
-	componentWillUnmount() {
-		this.mounted = false;
-    	clearInterval(this.timerID);
-  	  }
+	// componentWillUnmount() {
+	// 	this.mounted = false;
+ //    	clearInterval(this.timerID);
+ //  	  }
 
 
 	handleClick(value){
@@ -112,6 +114,14 @@ class Chat extends React.Component {
 	 	.catch((error) => {
 	 		console.log(error)
 	 	})
+	 }
+
+	 handleSearch() {
+
+		document.getElementById('search').style.display = 'block';
+		document.getElementById('search').style.opacity = 1;
+
+
 	 }
 	 
 	
@@ -152,7 +162,8 @@ class Chat extends React.Component {
 				 </div>
 				<div style={{background:'white'}}>
 				  <div className="ui one item item menu">
-				   <div className="active item"><i className="users icon" style={{fontSize:'1.5rem',color:'black'}}></i> &nbsp; Chats </div>
+				   <div className="active item" style={{justifyContent:'space-around'}} onClick={this.handleSearch}>
+				   <i className="users icon" style={{fontSize:'1.5rem',color:'black'}}></i><Search /></div>
 				  </div>
 				     <Recent chat={this.state.person} feedHandler={this.handleChat} />
 				  </div>
