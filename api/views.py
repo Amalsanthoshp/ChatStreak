@@ -151,3 +151,21 @@ def userLogin(request):
 			return HttpResponse(status=404)
 	else:
 		return HttpResponse(status=400)
+
+
+class SearchUserView(generics.ListCreateAPIView):
+
+	'''
+	Return all the users with given username
+	'''
+
+	serializer_class = UserSearchSerializer
+
+	def get_queryset(self):
+		return Person.objects.filter(id=1)
+
+	def list(self,request,*args, **kwargs):
+		queryset = self.get_queryset()
+		serializer = UserSearchSerializer(queryset, many=True)
+		return Response(serializer.data)
+
