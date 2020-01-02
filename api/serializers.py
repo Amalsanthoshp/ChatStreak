@@ -184,3 +184,10 @@ class UserSerializerWithToken(serializers.ModelSerializer):
         model = Person
         fields = ('token', 'username', 'password')
 
+
+
+class UserSearchSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Person
+        fields = ('id','username','email','first_name','last_name')
