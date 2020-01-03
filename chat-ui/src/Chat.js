@@ -120,6 +120,7 @@ class Chat extends React.Component {
 
 		document.getElementById('search').style.display = 'block';
 		document.getElementById('search').style.opacity = 1;
+		document.getElementById('search-results').style.display = 'block';
 
 
 	 }
