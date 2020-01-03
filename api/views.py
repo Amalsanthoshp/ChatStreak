@@ -156,16 +156,19 @@ def userLogin(request):
 class SearchUserView(generics.ListCreateAPIView):
 
 	'''
-	Return all the users with given username
+	Return all the users with given username using icontains queryset
+
 	'''
 
 	serializer_class = UserSearchSerializer
 
 	def get_queryset(self):
-		return Person.objects.filter(id=1)
+		return Person.objects.filter(username__icontains=self.kwargs['search_str'])
 
-	def list(self,request,*args, **kwargs):
+	def list(self,request,search_str,*args, **kwargs):
 		queryset = self.get_queryset()
+		if not queryset:
+			return HttpResponse(status=404)
 		serializer = UserSearchSerializer(queryset, many=True)
 		return Response(serializer.data)
 
