@@ -43,7 +43,7 @@ urlpatterns = [
     path('logout/',LogOut),
     path('feed_delete/<int:pk>/',FeedDeleteView),
     path('messages/<int:pk>/',ChatMessageView.as_view()),
-    path('search/',SearchUserView.as_view()),
+    path('search/<slug:search_str>/',SearchUserView.as_view()),
     path('test/',userLogin)
 
 
