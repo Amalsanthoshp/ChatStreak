@@ -255,3 +255,45 @@ export function getFeed(url){
 		    
 
 }
+
+export function userSearch(url){
+	axios.defaults.xsrfHeaderName = "X-CSRFToken";
+		axios.defaults.xsrfCookieName = "csrftoken";
+	    function getCookie(name) {
+		    var cookieValue = null;
+		    if (document.cookie && document.cookie !== '') {
+		        var cookies = document.cookie.split(';');
+		        for (var i = 0; i < cookies.length; i++) {
+		            var cookie = cookies[i].trim();
+		            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+		                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+		                break;
+		            }
+		        }
+		    }
+		    return cookieValue;
+		}
+		var csrftoken = getCookie('csrftoken');
+		console.log(csrftoken)
+		let Token = localStorage.getItem('token')
+		var config = {
+		            
+		    headers: {'Authorization' : "JWT " + Token}
+		};		            		                
+
+	  	return axios.get(url,config)
+		    .then(function (res){
+		    	if (res.status=='200'){
+		     	return res
+
+		     }})
+		    .catch(function (error) {
+			    if (error.response) {
+			      if(error.response.status =='400' || error.response.status =='401'){
+			      	return error
+			      }
+			    }
+			  })
+		    
+
+}
