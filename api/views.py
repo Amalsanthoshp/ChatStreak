@@ -135,7 +135,7 @@ class ChatMessageView(generics.ListCreateAPIView):
 		serializer = MessageSerializer(queryset, many=True,context=request.user)
 		return Response(serializer.data)
 
- 
+@csrf_exempt  
 def userLogin(request):
 	if request.method == 'POST':
 		body_unicode = request.body.decode('utf-8')
