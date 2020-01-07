@@ -2,6 +2,8 @@ import React from 'react';
 import cogoToast from 'cogo-toast';
 import $ from 'jquery';
 import axios from 'axios';
+import ReactModal from './semantic/ReactModal'
+
 
 class Feed extends React.Component {
 	_isMounted = false;
@@ -61,7 +63,7 @@ class Feed extends React.Component {
 					  	 <div style={{color:'black'}}>✍</div>
 						  <div id={this.props.id +'_feed_settings'}className="menu" style={display}>
 						    <div className="item" onClick={this.handleEdit}>Edit</div>
-						    <div className="item" onClick={this.handleDelete}>Delete</div>
+						    <div className="item"><ReactModal clickHandler={this.handleDelete} title='Delete message !' details='Are you sure you want to delete the message ?'/></div>
 						  </div>
 						</div>
 						</span>
