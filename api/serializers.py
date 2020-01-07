@@ -27,7 +27,8 @@ class MessageSerializer(serializers.ModelSerializer):
 	user_id = serializers.SerializerMethodField('get_userId')
 	user_sent_username = serializers.CharField(source='user_sent.username')
 	user_recevied_username =serializers.CharField(source='user_recevied.username')
-	username = serializers.SerializerMethodField('get_userName')	
+	username = serializers.SerializerMethodField('get_userName')
+
 
 	class Meta:
 		fields = (  'user_id','username','id','user_sent_id','user_recevied_id',
@@ -44,6 +45,11 @@ class MessageSerializer(serializers.ModelSerializer):
 	def get_userName(self,obj):
 		user=Person.objects.get(id=self.context.id)
 		return user.username
+
+	# def get_receivingUser(self,obj):
+	# 	print(self.kwargs['pk'])
+	# 	user = Person.objects.get(id=self.kwargs['pk'])
+	# 	return user
 
 
 
