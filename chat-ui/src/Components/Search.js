@@ -91,7 +91,7 @@ export default class Search extends React.Component {
 			<div className="ui category right alinged search">
 			  <div className="ui icon input">
 			  	<i className="search icon"></i>
-			    <input className="prompt" type="text" placeholder="Search Friends..." id='search' onInput={this.handleChange} style={{display:this.state.open ? 'block':'none',transition:'opacity 2s ease-out',opacity:'0'}}/>
+			    <input className="prompt" onClick={this.handleClick} type="text" placeholder="Search Friends..." id='search' onInput={this.handleChange} style={{display:this.state.open ? 'block':'none',transition:'opacity 2s ease-out',opacity:'0'}}/>
 			  </div>
 			  <div className="results transition" id='search-results' style={{display:this.state.open ? 'block':'none',width:'150px'}}>
 			    <div className="category">
