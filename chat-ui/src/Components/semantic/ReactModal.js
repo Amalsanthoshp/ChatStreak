@@ -16,6 +16,7 @@ class ReactModal extends Component {
   close = () => this.setState({ open: false })
 
   handleClick(event) {
+    this.close()
     this.props.clickHandler(event)
   }
 
