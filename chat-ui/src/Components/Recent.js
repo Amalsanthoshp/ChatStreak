@@ -38,7 +38,8 @@ class Recent extends React.Component {
 				    	 name= {username}
 				    	 image = {'https://ui-avatars.com/api/?background=0D8ABC&color=fff&name='+username}
 				    	 message={this.props.chat.recentMessages_ReceivedAndSend[i].message}
-				    	 time={this.props.chat.recentMessages_ReceivedAndSend[i].time}
+				    	 time={this.props.chat.recentMessages_ReceivedAndSend[i].delivered_time}
+				    	 deliver = {this.props.chat.recentMessages_ReceivedAndSend[i].delivered_time ? i : null}
 				    	 /></span>);
 				    }
 		 }
