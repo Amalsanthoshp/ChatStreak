@@ -11,6 +11,7 @@ export default class Search extends React.Component {
 
 		this.state = {
 
+			open:false,
 			users:[],
 
 		}
@@ -29,14 +30,13 @@ export default class Search extends React.Component {
 
 
 	handleClick() {
+			this.setState(prevState => ({
+ 				 open: !prevState.open
+			}));
 
-		document.getElementById('search').style.display = 'none';
-		document.getElementById('search-results').style.display = 'none';
 	}
 
 	handleChange() {
-
-
 		if(document.getElementById('search').value===''){
 					document.getElementById('search-results').style.display = 'none!important';
 
@@ -90,10 +90,10 @@ export default class Search extends React.Component {
 
 			<div className="ui category right alinged search">
 			  <div className="ui icon input">
-			    <input className="prompt" type="text" placeholder="Search Friends..." id='search' onChange={this.handleChange} style={{display:'none',transition:'opacity 2s ease-out',opacity:'0'}}/>
-			    <i className="search icon" onClick={this.handleClick}></i>
+			  	<i className="search icon"></i>
+			    <input className="prompt" type="text" placeholder="Search Friends..." id='search' onInput={this.handleChange} style={{display:this.state.open ? 'block':'none',transition:'opacity 2s ease-out',opacity:'0'}}/>
 			  </div>
-			  <div className="results transition" id='search-results' style={{display:'none',width:'150px'}}>
+			  <div className="results transition" id='search-results' style={{display:this.state.open ? 'block':'none',width:'150px'}}>
 			    <div className="category">
 			        <div className="results">
 			        {row}
