@@ -40,12 +40,15 @@ class IndividualChat extends React.Component {
 				 	   <div className="right floated author">
 					 	 <div>
 					       <img className="ui avatar image" src={this.props.image}/> {this.props.name}<br></br>
-					       <span className=''> {this.props.message}</span>
-
+					       <div>
+						       <span className='left floated'> {this.props.message}</span>
+						       <span className=" right floated ui green circular label">{this.props.deliver}</span>
+						    </div> 
 					      </div>
 					     </div>
 					    <div style={{paddingBottom:'0',paddingTop:'5px'}}>
-					  	 <span className="right floated time">{this.props.time}</span> 
+					  	 <span className="right floated time">{this.props.time} </span> 
+
 					  </div>
 					</div>
 				</>
