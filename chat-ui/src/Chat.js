@@ -143,7 +143,7 @@ class Chat extends React.Component {
 				      <img src="https://semantic-ui.com/images/avatar2/large/kristy.png"/>
 				    </div>
 				    <div className="content">
-				      <div className="header"><h2>{username}</h2></div>
+				      <div className="header"><h2>{username}<a className="ui blue empty circular label"></a></h2></div>
 				      <div className="meta">
 				        <a>Coworker &nbsp;</a><i className="edit icon" style={{fontSize:'1rem',color:'black'}} onClick={this.logout} ></i>
 				      </div>
