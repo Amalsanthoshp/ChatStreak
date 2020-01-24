@@ -36,20 +36,16 @@ class IndividualChat extends React.Component {
 
 		return(
 				<>
-			   	    <div id={this.props.id} className="ui green card" style={{borderRadius:'0!important'}} onClick={this.handleFeed}>
+			   	    <div id={this.props.id} className="ui green card" style={{borderRadius:'0!important',marginTop:'3px'}} onClick={this.handleFeed}>
 				 	   <div className="right floated author">
 					 	 <div>
-					       <img className="ui avatar image" src={this.props.image}/> {this.props.name}<br></br>
+					       <img className="ui avatar image" src={this.props.image}/><b>{this.props.name}</b><br></br>
 					       <div>
 						       <span className='left floated'> {this.props.message}</span>
 						       <span className=" right floated ui green circular label">{this.props.deliver}</span>
 						    </div> 
 					      </div>
 					     </div>
-					    <div style={{paddingBottom:'0',paddingTop:'5px'}}>
-					  	 <span className="right floated time">{this.props.time} </span> 
-
-					  </div>
 					</div>
 				</>
 			);
