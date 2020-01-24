@@ -50,25 +50,28 @@ class Feed extends React.Component {
 		return(
 
 
-			<>	  
-				<div id={this.props.id +'_feed'} className="ui fluid link grey card" style={{marginTop:'.2rem',borderRadius:'0!important'}}>
-					<div className="right floated author" style={{paddingTop:'.2rem'}}>
-					      <img className="ui avatar image" src={this.props.image}/> <b>{this.props.name}</b>
+			<>	  		
+					<div className="ui feed fluid link" style={{padding:'.5rem'}}>
+					  <div className="event">
+					    <div className="label">
+					      <img src={this.props.image}/>
+					      <div className='left floated' style={{marginLeft:'.5rem'}}><b>{this.props.name}</b></div>
 					    </div>
-					  <div className="content">
-					  	<span className='left floated'> {this.props.message}</span>
-					  	<span className="left floated time description">{this.props.time}</span> 
-					  	<span className='left floated' style={{background:'transparent'}}  onClick={this.handleClick}>
-					  	<div id={this.props.id +'_feed_'} className="ui floating dropdown icon button" style={{padding:'1px'}}>
-					  	 <div style={{color:'black'}}>✍</div>
-						  <div id={this.props.id +'_feed_settings'}className="menu" style={display}>
-						    <div className="item" onClick={this.handleEdit}>Edit</div>
-						    <div className="item"><ReactModal clickHandler={this.handleDelete} title='Delete message !' details='Are you sure you want to delete the message ?'/></div>
+						<div className="content" style={{marginTop:'1.1rem',marginLeft:'.5rem'}}>
+					  	 <span className='left floated'> {this.props.message}</span>
+					  	  <span className="left floated time description">{this.props.time}</span> 
+					     	<span className='left floated' style={{background:'transparent'}}  onClick={this.handleClick}>
+					     	<div id={this.props.id +'_feed_'} className="ui right floated floating dropdown icon button" style={{padding:'1px'}}>
+					  	     <div style={{color:'black'}}>✍</div>
+						     <div id={this.props.id +'_feed_settings'}className="menu" style={display}>
+						       <div className="item" onClick={this.handleEdit}>Edit</div>
+						      <div className="item"><ReactModal clickHandler={this.handleDelete} title='Delete message !' details='Are you sure you want to delete the message ?'/></div>
+						    </div>
 						  </div>
-						</div>
 						</span>
 					  </div>
-					</div>		 
+					  </div>
+					</div> 
             </>
 
 
