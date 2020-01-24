@@ -51,7 +51,7 @@ class ChatScreen extends React.Component {
 			     	}
 			    }
 		 else{
-		 	let rows = <div> Loading....</div>
+		 	let rows = <div><p> Loading....</p></div>
 		 }
 		 
 
@@ -66,7 +66,7 @@ class ChatScreen extends React.Component {
 						 <div style={{justifyContent:'flex-end',paddingLeft:'12px'}}><i className="cog icon" style={{fontSize:'1.5rem',color:'green'}}></i></div>
 					  </div>
 					</div>
-					<div id='main-chatscreen' className="ui segment" style={{height:'85vh',overflow:'scroll',paddingTop:'0',paddingBottom:'0',marginTop:'0',marginBottom:'0'}}>
+					<div id='main-chatscreen' className="ui segment" style={{height:'85vh',overflowY:'auto',paddingTop:'0',paddingBottom:'0',marginTop:'0',marginBottom:'0',paddingLeft:'5px'}}>
 						<div className="ui list" style={{width:'100%'}}>
 						  {rows}
 						</div>
