@@ -162,7 +162,7 @@ class Chat extends React.Component {
 				    </div>
 				 </div>
 				<div style={{background:'white'}}>
-				  <div className="ui one item item menu">
+				  <div className="ui one item item menu" style={{marginBottom:'0'}}>
 				   <div className="active item" style={{justifyContent:'space-around'}} onClick={this.handleSearch}>
 				   <i className="users icon" style={{fontSize:'1.5rem',color:'black'}}></i><Search searchSelect={this.handleChat}/></div>
 				  </div>
