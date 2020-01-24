@@ -49,7 +49,7 @@ class Recent extends React.Component {
 		 let row = rows ? rows :<p> Loading...</p>
 
 		return (
-				 <div id='recent_list' className="ui list fluid" style={{overflow:'scroll',height:'36vh'}}>
+				 <div id='recent_list' className="ui list fluid" style={{overflowY:'auto',height:'36vh',marginTop:'0'}}>
 				    {rows}
 				  </div>
 
