@@ -128,7 +128,7 @@ class LoginForm extends React.Component {
         </div>  
 		 return(
 
-			<div className='ui container'>
+			<div className='ui container' style={{display:'flex',marginTop:'3rem'}}>
 			     
 			     {login}
 			     {signup}
